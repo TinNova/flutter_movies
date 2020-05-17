@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:movies/colours.dart';
-import 'package:movies/models/movie_poster.dart';
 import 'package:movies/widgets/grid_list.dart';
 import 'package:movies/widgets/text_widgets.dart';
-import 'dimens.dart';
 import 'widgets/jumbo_carousel.dart';
 
 class MainScreen extends StatelessWidget {

@@ -27,11 +27,10 @@ class GridList extends StatelessWidget {
               return Stack(
                 children: <Widget>[
                   Card(
-                    elevation: 1,
+                    elevation: 3,
                     shadowColor: Colors.black,
                     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
                     margin: EdgeInsets.all(0.0),
-                    borderOnForeground: false,
                     child: Container(
                       decoration: BoxDecoration(
                         image: DecorationImage(image: AssetImage(poster.imageUrl)),
