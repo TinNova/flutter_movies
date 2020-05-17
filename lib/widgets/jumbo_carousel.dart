@@ -26,6 +26,7 @@ class JumboCarousel extends StatelessWidget {
     return Container(
       width: 350,
       decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(12.0),
         boxShadow: [BoxShadow(color: primaryColourShadow2, blurRadius: 7, spreadRadius: 2.0)],
       ),
       margin: EdgeInsets.only(left: 7.5, top: 7.5, right: 7.5, bottom: 7.5),
