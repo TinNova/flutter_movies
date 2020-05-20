@@ -11,7 +11,7 @@ class JumboCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 212.0, // i don't like this number, we need a wrap content instead 195.0, 217.0, 198.0
+      height: 227.0, // i don't like this number, we need a wrap content instead 195.0, 217.0, 198.0
       child: ScrollSnapList(
         itemBuilder: _buildListItem,
         itemSize: 365.0,
@@ -35,7 +35,7 @@ class JumboCarousel extends StatelessWidget {
             elevation: 3,
             shadowColor: Colors.black,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
-            margin: EdgeInsets.only(left: 7.5, top: 7.5, right: 7.5, bottom: 7.5),
+            margin: EdgeInsets.only(left: 7.5, top: 15, right: 7.5, bottom: 15),
             borderOnForeground: false,
             child: Container(
               width: 350,
