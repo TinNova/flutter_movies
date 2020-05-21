@@ -49,7 +49,7 @@ class JumboCarousel extends StatelessWidget {
         ),
         Positioned(
           right: 20.0,
-          bottom: 16.0,
+          bottom: 20.0,
           child: Icon(
             Icons.favorite_border,
             color: Colors.white,
