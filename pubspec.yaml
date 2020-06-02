@@ -12,10 +12,18 @@ dependencies:
 
   cupertino_icons: ^0.1.2
   scroll_snap_list: ^0.4.0
+  # Provider
+  provider: ^4.1.2
+  # Dependency Injection
+  get_it:
+  injectable:
+  # Http
+  http: ^0.12.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  injectable_generator:
 
 
 # The following section is specific to Flutter.
@@ -24,7 +32,8 @@ flutter:
   uses-material-design: true
 
   assets:
-    - images/
+    - assets/images/
+    - assets/
 
   # fonts:
   #   - family: Schyler

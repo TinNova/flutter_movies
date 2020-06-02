@@ -5,18 +5,18 @@ class MoviePoster {
 }
 
 List<MoviePoster> posters = [
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg'),
-  MoviePoster(imageUrl: 'images/poster_starwars.jpg')
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg'),
+  MoviePoster(imageUrl: 'assets/images/poster_starwars.jpg')
 ];

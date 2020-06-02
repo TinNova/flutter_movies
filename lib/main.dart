@@ -1,199 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:movies/app/locator.dart';
+import 'package:movies/ui/views/detail/detail_view.dart';
+import 'ui/views/main/main_screen.dart';
 
-import 'main_screen.dart';
-
-void main() => runApp(MyApp());
+void main() {
+  setupLocator();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: MainScreen(),
-
-//      initialRoute: MainScreen.id,
-//      routes: {
-//        DetailScreen.id: (context) => DetailScreen(),
+//      home: MainScreen(),
+      initialRoute: MainScreen.id,
+      routes: {
+        MainScreen.id: (context) => MainScreen(),
+        DetailView.id: (context) => DetailView(),
 //        CastScreen.id: (context) => CastScreen(),
 //        RegistrationScreen.id: (context) => RegistrationScreen(),
 //        LoginScreen.id: (context) => LoginScreen(),
 //        SearchScreen.id: (context) => SearchScreen()
-//      },
+      },
     );
   }
 }
-
-///
-//import 'package:flutter/material.dart';
-//import 'package:scroll_snap_list/scroll_snap_list.dart';
-//import 'models/movie_theatre.dart';
-//
-//void main() => runApp(HorizontalListJumboDemo());
-//
-//class HorizontalListJumboDemo extends StatefulWidget {
-//  @override
-//  _HorizontalListJumboDemoState createState() => _HorizontalListJumboDemoState();
-//}
-//
-//class _HorizontalListJumboDemoState extends State<HorizontalListJumboDemo> {
-//  int _focusedIndex = 0;
-//  GlobalKey<ScrollSnapListState> sslKey = GlobalKey();
-//
-//  void _onItemFocus(int index) {
-//    setState(() {
-//      _focusedIndex = index;
-//    });
-//  }
-//
-////  Widget _buildItemDetail() {
-////    if (data.length > _focusedIndex)
-////    return Container(
-////      height: 350,
-////        child: Text("index $_focusedIndex: ${data[_focusedIndex]}"),
-////    );
-////
-////    return Container(
-////      height: 350,
-////      child: Text("No Data"),
-////    );
-////  }
-//
-//  Widget _buildListItem(BuildContext context, int index) {
-//    MovieTheatre movie = movies[index];
-//    return Container(
-//      width: 350.0,
-//      decoration: BoxDecoration(
-//        color: Colors.lightBlue,
-//      ),
-//      margin: EdgeInsets.symmetric(horizontal: 5),
-//      child: InkWell(
-//        onTap: () {
-//          sslKey.currentState.focusToItem(index);
-//        },
-//        child: Image(image: AssetImage(movie.imageUrl)),
-//      ),
-//    );
-//  }
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Jumbo List Demo',
-//      home: Scaffold(
-//        appBar: AppBar(
-//          title: Text("Jumbo List"),
-//        ),
-//        body: Container(
-//          child: Column(
-//            children: <Widget>[
-//              Expanded(
-//                child: Container(
-//                  child: ScrollSnapList(
-//                    margin: EdgeInsets.symmetric(vertical: 10),
-//                    onItemFocus: _onItemFocus,
-//                    itemSize: 360.0,
-//                    itemBuilder: _buildListItem,
-//                    itemCount: movies.length,
-//                    key: sslKey,
-//                  ),
-//                ),
-//              ),
-//            ],
-//          ),
-//        ),
-//      ),
-//    );
-//  }
-//}
-
-///
-///
-//import 'dart:math';
-//
-//import 'package:flutter/material.dart';
-//import 'package:scroll_snap_list/scroll_snap_list.dart';
-//
-//void main() => runApp(HorizontalListJumboDemo());
-//
-//class HorizontalListJumboDemo extends StatefulWidget {
-//  @override
-//  _HorizontalListJumboDemoState createState() => _HorizontalListJumboDemoState();
-//}
-//
-//class _HorizontalListJumboDemoState extends State<HorizontalListJumboDemo> {
-//  List<int> data = [];
-//  int _focusedIndex = 0;
-//  GlobalKey<ScrollSnapListState> sslKey = GlobalKey();
-//
-//  @override
-//  void initState() {
-//    super.initState();
-//
-//    for (int i = 0; i < 30; i++) {
-//      data.add(Random().nextInt(100) + 1);
-//    }
-//  }
-//
-//  void _onItemFocus(int index) {
-//    setState(() {
-//      _focusedIndex = index;
-//    });
-//  }
-//
-//  Widget _buildItemDetail() {
-//    if (data.length > _focusedIndex)
-//      return Container(
-//        height: 350,
-//        child: Text("index $_focusedIndex: ${data[_focusedIndex]}"),
-//      );
-//
-//    return Container(
-//      height: 350,
-//      child: Text("No Data"),
-//    );
-//  }
-//
-//  Widget _buildListItem(BuildContext context, int index) {
-//    return Container(
-//      margin: EdgeInsets.symmetric(horizontal: 5),
-//      width: 350,
-//      child: Material(
-//        color: Colors.lightBlueAccent,
-//        child: InkWell(
-//          onTap: () {
-//            sslKey.currentState.focusToItem(index);
-//          },
-//          child: Text("Child index $index"),
-//        ),
-//      ),
-//    );
-//  }
-//
-//  @override
-//  Widget build(BuildContext context) {
-//    return MaterialApp(
-//      title: 'Jumbo List Demo',
-//      home: Scaffold(
-//        appBar: AppBar(
-//          title: Text("Jumbo List"),
-//        ),
-//        body: Container(
-//          child: Column(
-//            children: <Widget>[
-//              Expanded(
-//                child: ScrollSnapList(
-//                  margin: EdgeInsets.symmetric(vertical: 10),
-//                  onItemFocus: _onItemFocus,
-//                  itemSize: 360,
-//                  itemBuilder: _buildListItem,
-//                  itemCount: data.length,
-//                  key: sslKey,
-//                ),
-//              ),
-//              _buildItemDetail(),
-//            ],
-//          ),
-//        ),
-//      ),
-//    );
-//  }
-//}
