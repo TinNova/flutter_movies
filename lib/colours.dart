@@ -7,3 +7,4 @@ const primaryColourShadow4 = Color(0xFFD4C2EF);
 
 const primaryColourShadow = Color(0xFFEEE9F5);
 const primaryColourShadow2 = Color(0xFFDDD2EF);
+const white = Color(0xFFFFFFFF);

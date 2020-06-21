@@ -17,9 +17,9 @@ class JsonRepo {
     }
   }
 
-  Future<Movies> getLatestMovies(String apiKey) async {
+  Future<Movies> getUpcomingMovies(String apiKey) async {
     http.Response response =
-        await http.get('https://api.themoviedb.org/3/movie/latest?api_key=$apiKey&language=en-US&page=1');
+        await http.get('https://api.themoviedb.org/3/movie/upcoming?api_key=$apiKey&language=en-US&page=1');
 
     if (response.statusCode == 200) {
       return Movies.fromJson(json.decode(response.body));
@@ -27,7 +27,7 @@ class JsonRepo {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       print('error');
-      throw Exception('Failed to load currentMovies');
+      throw Exception('Failed to load upcomingMovies');
     }
   }
 
@@ -41,7 +41,7 @@ class JsonRepo {
       // If the server did not return a 200 OK response,
       // then throw an exception.
       print('error');
-      throw Exception('Failed to load popularMovies');
+      throw Exception('Failed to load topRateMovies');
     }
   }
 

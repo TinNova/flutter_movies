@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:movies/app/locator.dart';
 import 'package:movies/colours.dart';
 import 'package:movies/widgets/grid_list.dart';
 import 'package:movies/widgets/text_widgets.dart';
-import 'package:provider/provider.dart';
 import '../../../widgets/jumbo_carousel.dart';
 import '../base_view.dart';
 import 'main_viewmodel.dart';
@@ -53,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
                       SliverPersistentHeader(
                         pinned: true,
                         floating: true,
-                        delegate: ContestTabHeader(
+                        delegate: TabHeader(
                           Container(
                             decoration: BoxDecoration(
                               color: Colors.white,
@@ -65,9 +63,9 @@ class _MainScreenState extends State<MainScreen> {
                                 Container(
                                   padding: EdgeInsets.only(right: 10.0),
                                   child: GestureDetector(
-                                    child: TitleMedium('Latest'),
+                                    child: TitleMedium('Upcoming'),
                                     onTap: () {
-                                      mainViewModel.onLatestClicked(); // Here we are changing data in the ViewModel
+                                      mainViewModel.onUpcomingClicked(); // Here we are changing data in the ViewModel
                                     },
                                   ),
                                 ),
@@ -76,7 +74,7 @@ class _MainScreenState extends State<MainScreen> {
                                   child: GestureDetector(
                                     child: TitleMedium('Top rated'),
                                     onTap: () {
-                                      mainViewModel.onTopRatedClicked(); // Here we are changing data in the ViewModel
+                                      mainViewModel.onTopRatedClicked();
 //                                      mainViewModel.onFilmCategoryClicked(FilmCategory.TOP_RATED);
                                     },
                                   ),
@@ -119,9 +117,8 @@ class _MainScreenState extends State<MainScreen> {
   }
 }
 
-// this should be moved to it's own class
-class ContestTabHeader extends SliverPersistentHeaderDelegate {
-  ContestTabHeader(
+class TabHeader extends SliverPersistentHeaderDelegate {
+  TabHeader(
     this.searchUI,
   );
 
@@ -142,11 +139,4 @@ class ContestTabHeader extends SliverPersistentHeaderDelegate {
   bool shouldRebuild(SliverPersistentHeaderDelegate oldDelegate) {
     return false;
   }
-}
-
-// this should be moved to it's own class
-enum FilmCategory {
-  LATEST,
-  TOP_RATED,
-  POPULAR,
 }

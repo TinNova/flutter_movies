@@ -12,9 +12,6 @@ class MainViewModel extends BaseViewModel {
   final JsonRepo _jsonRepo = locator<JsonRepo>();
   final SecretRepo _secretRepo = locator<SecretRepo>();
 
-//  JsonRepo jsonRepo = new JsonRepo();
-//  SecretRepo secretRepo = new SecretRepo(secretPath: "assets/secrets.json");
-
   List<Results> _gridMovies;
   List<Results> _jumboMovies;
   String _apiKey;
@@ -30,8 +27,8 @@ class MainViewModel extends BaseViewModel {
     _getJumboMovies();
   }
 
-  onLatestClicked() {
-    _getLatestMovies();
+  onUpcomingClicked() {
+    _getUpcomingMovies();
   }
 
   onTopRatedClicked() {
@@ -52,8 +49,8 @@ class MainViewModel extends BaseViewModel {
     debugPrint('jumbo Network Request');
   }
 
-  _getLatestMovies() async {
-    Movies movies = await _jsonRepo.getLatestMovies(_apiKey);
+  _getUpcomingMovies() async {
+    Movies movies = await _jsonRepo.getUpcomingMovies(_apiKey);
 
     _gridMovies = movies.results;
 

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+
+import '../dimens.dart';
 
 class TitleMedium extends StatelessWidget {
   TitleMedium(this.text);
@@ -9,10 +12,7 @@ class TitleMedium extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       text,
-      style: TextStyle(
-        fontSize: 18.0,
-        fontWeight: FontWeight.w900,
-      ),
+      style: GoogleFonts.archivoBlack(fontSize: fontMedium),
     );
   }
 }
