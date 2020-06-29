@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies/colours.dart';
-import 'package:movies/widgets/grid_list.dart';
+import 'package:movies/ui/views/main/grid_list.dart';
 import 'package:movies/widgets/text_widgets.dart';
-import '../../../widgets/jumbo_carousel.dart';
+import 'jumbo_carousel.dart';
 import '../base_view.dart';
 import 'main_viewmodel.dart';
 

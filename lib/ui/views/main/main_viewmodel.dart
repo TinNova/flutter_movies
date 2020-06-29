@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:movies/app/locator.dart';
 import 'package:movies/models/movies.dart';
 import 'package:movies/network/json_repo.dart';
@@ -12,9 +12,9 @@ class MainViewModel extends BaseViewModel {
   final JsonRepo _jsonRepo = locator<JsonRepo>();
   final SecretRepo _secretRepo = locator<SecretRepo>();
 
+  String _apiKey;
   List<Results> _gridMovies;
   List<Results> _jumboMovies;
-  String _apiKey;
 
   //Getters
   List<Results> get gridMovies => _gridMovies;

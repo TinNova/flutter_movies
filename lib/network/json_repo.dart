@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
+import 'package:movies/models/movie_trailer.dart';
 import 'package:movies/models/movies.dart';
 
 class JsonRepo {
@@ -10,9 +11,6 @@ class JsonRepo {
     if (response.statusCode == 200) {
       return Movies.fromJson(json.decode(response.body));
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      print('error');
       throw Exception('Failed to load currentMovies');
     }
   }
@@ -24,9 +22,6 @@ class JsonRepo {
     if (response.statusCode == 200) {
       return Movies.fromJson(json.decode(response.body));
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      print('error');
       throw Exception('Failed to load upcomingMovies');
     }
   }
@@ -38,9 +33,6 @@ class JsonRepo {
     if (response.statusCode == 200) {
       return Movies.fromJson(json.decode(response.body));
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      print('error');
       throw Exception('Failed to load topRateMovies');
     }
   }
@@ -52,10 +44,19 @@ class JsonRepo {
     if (response.statusCode == 200) {
       return Movies.fromJson(json.decode(response.body));
     } else {
-      // If the server did not return a 200 OK response,
-      // then throw an exception.
-      print('error');
       throw Exception('Failed to load popularMovies');
+    }
+  }
+
+  Future<MovieTrailer> getTrailers(String apiKey, int movieId) async {
+    http.Response response =
+        await http.get("https://api.themoviedb.org/3/movie/$movieId/videos?api_key=$apiKey&language=en-US");
+
+    if (response.statusCode == 200) {
+      // how to return the Trailer list directly?
+      return MovieTrailer.map(json.decode(response.body));
+    } else {
+      throw Exception('Failed to load Trailers');
     }
   }
 }

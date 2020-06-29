@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/models/movies.dart';
-import '../colours.dart';
-import '../dimens.dart';
+import '../../../colours.dart';
+import '../../../dimens.dart';
 
 class GridList extends StatelessWidget {
   final List<Results> movies;

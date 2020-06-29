@@ -4,7 +4,7 @@ import 'package:movies/models/movies.dart';
 import 'package:movies/ui/views/detail/detail_view.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../colours.dart';
+import '../../../colours.dart';
 
 class JumboCarousel extends StatelessWidget {
   final List<Results> currentMovies;
