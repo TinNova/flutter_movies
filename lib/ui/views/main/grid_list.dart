@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movies/models/movies.dart';
+import 'package:movies/data/models/movies.dart';
 import '../../../colours.dart';
 import '../../../dimens.dart';
 
 class GridList extends StatelessWidget {
-  final List<Results> movies;
+  final List<MDBMovie> movies;
 
   GridList(this.movies);
 
@@ -21,7 +21,7 @@ class GridList extends StatelessWidget {
             childAspectRatio: 2 / 3,
           ),
           itemBuilder: (BuildContext context, int index) {
-            Results movie = movies[index];
+            MDBMovie movie = movies[index];
             return Stack(
               children: <Widget>[
                 Card(

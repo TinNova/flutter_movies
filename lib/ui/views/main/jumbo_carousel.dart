@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:movies/data/models/movies.dart';
 import 'package:movies/dimens.dart';
-import 'package:movies/models/movies.dart';
+import 'package:movies/domain/movie.dart';
 import 'package:movies/ui/views/detail/detail_view.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../colours.dart';
 
 class JumboCarousel extends StatelessWidget {
-  final List<Results> currentMovies;
+  final List<Movie> currentMovies;
 
   JumboCarousel(this.currentMovies);
 
@@ -16,7 +17,7 @@ class JumboCarousel extends StatelessWidget {
     return Container(
       height: 227.0, // i don't like this number, we need a wrap content instead 195.0, 217.0, 198.0
       child: ScrollSnapList(
-        key: PageStorageKey(Results),
+        key: PageStorageKey(MDBMovie),
         itemBuilder: _buildListItem,
         itemSize: 365.0,
         itemCount: currentMovies.length,
@@ -27,7 +28,7 @@ class JumboCarousel extends StatelessWidget {
   }
 
   Widget _buildListItem(BuildContext context, int index) {
-    Results currentMovie = currentMovies[index];
+    Movie currentMovie = currentMovies[index];
     return Stack(
       children: <Widget>[
         GestureDetector(
@@ -46,8 +47,7 @@ class JumboCarousel extends StatelessWidget {
             child: Container(
               width: 350,
               decoration: BoxDecoration(
-                image:
-                    DecorationImage(image: NetworkImage('http://image.tmdb.org/t/p/w780' + currentMovie.backdropPath)),
+                image: DecorationImage(image: NetworkImage(currentMovie.backdropPath)),
                 borderRadius: BorderRadius.circular(borderRadius),
                 boxShadow: [BoxShadow(color: primaryColourShadow4, blurRadius: blurRadius, spreadRadius: spreadRadius)],
               ),

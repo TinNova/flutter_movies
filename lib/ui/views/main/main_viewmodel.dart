@@ -1,24 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:movies/app/locator.dart';
-import 'package:movies/models/movies.dart';
-import 'package:movies/network/json_repo.dart';
-import 'package:movies/network/secret_repo.dart';
+import 'package:movies/data/models/movies.dart';
+import 'package:movies/data/network/json_repo.dart';
+import 'package:movies/data/network/secret_repo.dart';
+import 'package:movies/domain/movie.dart';
+import 'package:movies/domain/movie_interactor.dart';
 import 'package:movies/ui/views/base_viewmodel.dart';
 
 /// Represents the state of the view
 enum ViewState { Idle, Busy }
 
 class MainViewModel extends BaseViewModel {
-  final JsonRepo _jsonRepo = locator<JsonRepo>();
-  final SecretRepo _secretRepo = locator<SecretRepo>();
+  final _jsonRepo = locator<JsonRepo>();
+  final _movieInteractor = locator<MovieInteractor>();
+  final _secretRepo = locator<SecretRepo>();
 
   String _apiKey;
-  List<Results> _gridMovies;
-  List<Results> _jumboMovies;
+  List<MDBMovie> _gridMovies;
+  List<Movie> _jumboMovies;
 
   //Getters
-  List<Results> get gridMovies => _gridMovies;
-  List<Results> get currentMovies => _jumboMovies;
+  List<MDBMovie> get gridMovies => _gridMovies;
+
+  List<Movie> get currentMovies => _jumboMovies;
 
   onViewCreated() async {
     var secret = await _secretRepo.getApi();
@@ -40,17 +44,14 @@ class MainViewModel extends BaseViewModel {
   }
 
   _getJumboMovies() async {
-    Movies movies = await _jsonRepo.getCurrentMovies(_apiKey);
+    _jumboMovies = await _movieInteractor.getCurrentMovies(_apiKey);
 
-    _jumboMovies = movies.results;
-
-    //Notify every widget that is displaying _movies that the values have changed.
     notifyListeners();
     debugPrint('jumbo Network Request');
   }
 
   _getUpcomingMovies() async {
-    Movies movies = await _jsonRepo.getUpcomingMovies(_apiKey);
+    MDBMovies movies = await _jsonRepo.getUpcomingMovies(_apiKey);
 
     _gridMovies = movies.results;
 
@@ -59,7 +60,7 @@ class MainViewModel extends BaseViewModel {
   }
 
   _getPopularMovies() async {
-    Movies movies = await _jsonRepo.getPopularMovies(_apiKey);
+    MDBMovies movies = await _jsonRepo.getPopularMovies(_apiKey);
 
     _gridMovies = movies.results;
 
@@ -70,7 +71,7 @@ class MainViewModel extends BaseViewModel {
   }
 
   _getTopRatedMovies() async {
-    Movies movies = await _jsonRepo.getTopRatedMovies(_apiKey);
+    MDBMovies movies = await _jsonRepo.getTopRatedMovies(_apiKey);
 
     _gridMovies = movies.results;
 

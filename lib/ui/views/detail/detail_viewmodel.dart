@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:movies/app/locator.dart';
-import 'package:movies/models/movie_trailer.dart';
-import 'package:movies/network/json_repo.dart';
-import 'package:movies/network/secret_repo.dart';
+import 'package:movies/data/models/movie_trailer.dart';
+import 'package:movies/data/network/json_repo.dart';
+import 'package:movies/data/network/secret_repo.dart';
 
 import '../base_viewmodel.dart';
 

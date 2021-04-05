@@ -80,4 +80,14 @@ class DetailAppBar implements SliverPersistentHeaderDelegate {
 
   @override
   OverScrollHeaderStretchConfiguration get stretchConfiguration => null;
+
+  // don't know what this does, it's mandatory
+  @override
+  // TODO: implement showOnScreenConfiguration
+  PersistentHeaderShowOnScreenConfiguration get showOnScreenConfiguration => null;
+
+  // don't know what this does, it's mandatory
+  @override
+  // TODO: implement vsync
+  TickerProvider get vsync => null;
 }

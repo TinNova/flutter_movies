@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movies/models/movie_trailer.dart';
 import 'package:movies/ui/views/base_view.dart';
 import 'package:movies/ui/views/detail/detail_appbar.dart';
 import 'package:movies/ui/views/detail/detail_viewmodel.dart';
@@ -27,7 +26,7 @@ class _DetailViewState extends State<DetailView> {
         detailViewModel.onViewCreated();
       },
       builder: (context, detailViewModel, child) => Scaffold(
-          resizeToAvoidBottomPadding: false,
+          resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
           body: CustomScrollView(
             slivers: <Widget>[

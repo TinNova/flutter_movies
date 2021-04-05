@@ -1,4 +1,4 @@
-import '../consts.dart';
+import '../../consts.dart';
 
 class MovieTrailer {
   int _id;

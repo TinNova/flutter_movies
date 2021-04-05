@@ -1,24 +1,24 @@
-class Movies {
+class MDBMovies {
   int _page;
-  List<Results> _results;
+  List<MDBMovie> _results;
   int _totalResults;
   int _totalPages;
 
-  Movies({page, results, totalResults, totalPages}) {
+  MDBMovies({page, results, totalResults, totalPages}) {
     this._page = page;
     this._results = results;
     this._totalResults = totalResults;
     this._totalPages = totalPages;
   }
 
-  List<Results> get results => _results;
+  List<MDBMovie> get results => _results;
 
-  Movies.fromJson(Map<String, dynamic> json) {
+  MDBMovies.fromJson(Map<String, dynamic> json) {
     _page = json['page'];
     if (json['results'] != null) {
-      _results = new List<Results>();
+      _results = new List<MDBMovie>();
       json['results'].forEach((v) {
-        _results.add(new Results.fromJson(v));
+        _results.add(new MDBMovie.fromJson(v));
       });
     }
     _totalResults = json['total_results'];
@@ -26,7 +26,7 @@ class Movies {
   }
 }
 
-class Results {
+class MDBMovie {
   String _posterPath;
   bool _adult;
   String _overview;
@@ -43,7 +43,7 @@ class Results {
 
 //  double voteAverage;
 
-  Results(
+  MDBMovie(
       {posterPath,
       adult,
       overview,
@@ -60,7 +60,7 @@ class Results {
 //      this.voteAverage
       });
 
-  Results.fromJson(Map<String, dynamic> json) {
+  MDBMovie.fromJson(Map<String, dynamic> json) {
     _posterPath = json['poster_path'];
     _adult = json['adult'];
     _overview = json['overview'];
