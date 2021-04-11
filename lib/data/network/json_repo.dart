@@ -15,34 +15,34 @@ class JsonRepo {
     }
   }
 
-  Future<MDBMovies> getUpcomingMovies(String apiKey) async {
+  Future<List<MDBMovie>> getUpcomingMovies(String apiKey) async {
     http.Response response =
         await http.get('https://api.themoviedb.org/3/movie/upcoming?api_key=$apiKey&language=en-US&page=1');
 
     if (response.statusCode == 200) {
-      return MDBMovies.fromJson(json.decode(response.body));
+      return MDBMovies.fromJson(json.decode(response.body)).results;
     } else {
       throw Exception('Failed to load upcomingMovies');
     }
   }
 
-  Future<MDBMovies> getTopRatedMovies(String apiKey) async {
+  Future<List<MDBMovie>> getTopRatedMovies(String apiKey) async {
     http.Response response =
         await http.get('https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey&language=en-US&page=1');
 
     if (response.statusCode == 200) {
-      return MDBMovies.fromJson(json.decode(response.body));
+      return MDBMovies.fromJson(json.decode(response.body)).results;
     } else {
       throw Exception('Failed to load topRateMovies');
     }
   }
 
-  Future<MDBMovies> getPopularMovies(String apiKey) async {
+  Future<List<MDBMovie>> getPopularMovies(String apiKey) async {
     http.Response response =
         await http.get('https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&language=en-US&page=1');
 
     if (response.statusCode == 200) {
-      return MDBMovies.fromJson(json.decode(response.body));
+      return MDBMovies.fromJson(json.decode(response.body)).results;
     } else {
       throw Exception('Failed to load popularMovies');
     }

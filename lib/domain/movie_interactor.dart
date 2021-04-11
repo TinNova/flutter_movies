@@ -1,25 +1,38 @@
 import 'package:movies/app/locator.dart';
-import 'package:movies/data/models/movies.dart';
 import 'package:movies/data/network/json_repo.dart';
 import 'package:movies/domain/movie.dart';
-import '../consts.dart';
+import 'mappers/MovieMapper.dart';
 
 class MovieInteractor {
   final _jsonRepo = locator<JsonRepo>();
+  final _movieMapper = locator<MovieMapper>();
 
   Future<List<Movie>> getCurrentMovies(String apiKey) async {
     return await _jsonRepo
         .getCurrentMovies(apiKey)
         .then((value) => value.where((element) => element.backdropPath != null))
-        .then((value) => value.map((e) => mapMovie(e)))
+        .then((value) => value.map((e) => _movieMapper.mapMovie(e)))
         .then((value) => value.toList());
   }
 
-  Movie mapMovie(MDBMovie element) {
-    return Movie(
-        id: element.id,
-        title: element.title,
-        posterPath: element.posterPath,
-        backdropPath: MOVIE_DATABASE_IMAGE_W780 + element.backdropPath);
+  Future<List<Movie>> getUpcomingMovies(String apiKey) async {
+    return await _jsonRepo
+        .getUpcomingMovies(apiKey)
+        .then((value) => value.map((e) => _movieMapper.mapMovie(e)))
+        .then((value) => value.toList());
+  }
+
+  Future<List<Movie>> getPopularMovies(String apiKey) async {
+    return await _jsonRepo
+        .getPopularMovies(apiKey)
+        .then((value) => value.map((e) => _movieMapper.mapMovie(e)))
+        .then((value) => value.toList());
+  }
+
+  Future<List<Movie>> getTopRatedMovies(String apiKey) async {
+    return await _jsonRepo
+        .getTopRatedMovies(apiKey)
+        .then((value) => value.map((e) => _movieMapper.mapMovie(e)))
+        .then((value) => value.toList());
   }
 }

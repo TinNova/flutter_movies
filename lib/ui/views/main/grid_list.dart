@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:movies/data/models/movies.dart';
+import 'package:movies/domain/movie.dart';
 import '../../../colours.dart';
 import '../../../dimens.dart';
 
 class GridList extends StatelessWidget {
-  final List<MDBMovie> movies;
+  final List<Movie> movies;
 
   GridList(this.movies);
 
@@ -21,7 +21,7 @@ class GridList extends StatelessWidget {
             childAspectRatio: 2 / 3,
           ),
           itemBuilder: (BuildContext context, int index) {
-            MDBMovie movie = movies[index];
+            Movie movie = movies[index];
             return Stack(
               children: <Widget>[
                 Card(
@@ -34,7 +34,7 @@ class GridList extends StatelessWidget {
 //                      image: 'http://image.tmdb.org/t/p/w185' + movie.posterPath),
                   child: Container(
                     decoration: BoxDecoration(
-                      image: DecorationImage(image: NetworkImage('http://image.tmdb.org/t/p/w185' + movie.posterPath)),
+                      image: DecorationImage(image: NetworkImage(movie.posterPath)),
                       borderRadius: BorderRadius.circular(borderRadius),
                       boxShadow: [
                         BoxShadow(color: primaryColourShadow4, blurRadius: blurRadius, spreadRadius: spreadRadius),

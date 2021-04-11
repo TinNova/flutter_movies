@@ -1,6 +1,4 @@
-import 'package:flutter/material.dart';
 import 'package:movies/app/locator.dart';
-import 'package:movies/data/models/movies.dart';
 import 'package:movies/data/network/json_repo.dart';
 import 'package:movies/data/network/secret_repo.dart';
 import 'package:movies/domain/movie.dart';
@@ -11,16 +9,15 @@ import 'package:movies/ui/views/base_viewmodel.dart';
 enum ViewState { Idle, Busy }
 
 class MainViewModel extends BaseViewModel {
-  final _jsonRepo = locator<JsonRepo>();
   final _movieInteractor = locator<MovieInteractor>();
   final _secretRepo = locator<SecretRepo>();
 
   String _apiKey;
-  List<MDBMovie> _gridMovies;
+  List<Movie> _gridMovies;
   List<Movie> _jumboMovies;
 
   //Getters
-  List<MDBMovie> get gridMovies => _gridMovies;
+  List<Movie> get gridMovies => _gridMovies;
 
   List<Movie> get currentMovies => _jumboMovies;
 
@@ -45,37 +42,21 @@ class MainViewModel extends BaseViewModel {
 
   _getJumboMovies() async {
     _jumboMovies = await _movieInteractor.getCurrentMovies(_apiKey);
-
     notifyListeners();
-    debugPrint('jumbo Network Request');
   }
 
   _getUpcomingMovies() async {
-    MDBMovies movies = await _jsonRepo.getUpcomingMovies(_apiKey);
-
-    _gridMovies = movies.results;
-
-    //Notify every widget that is displaying _movies that the values have changed.
+    _gridMovies = await _movieInteractor.getUpcomingMovies(_apiKey);
     notifyListeners();
   }
 
   _getPopularMovies() async {
-    MDBMovies movies = await _jsonRepo.getPopularMovies(_apiKey);
-
-    _gridMovies = movies.results;
-
-    //Notify every widget that is displaying _movies that the values have changed.
+    _gridMovies = await _movieInteractor.getPopularMovies(_apiKey);
     notifyListeners();
-
-    print(movies.results[1].title);
   }
 
   _getTopRatedMovies() async {
-    MDBMovies movies = await _jsonRepo.getTopRatedMovies(_apiKey);
-
-    _gridMovies = movies.results;
-
-    //Notify every widget that is displaying _movies that the values have changed.
+    _gridMovies = await _movieInteractor.getTopRatedMovies(_apiKey);
     notifyListeners();
   }
 }
