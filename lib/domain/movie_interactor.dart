@@ -8,20 +8,11 @@ class MovieInteractor {
   final _jsonRepo = locator<JsonRepo>();
 
   Future<List<Movie>> getCurrentMovies(String apiKey) async {
-    List<MDBMovie> movies = await _jsonRepo.getCurrentMovies(apiKey);
-    return returnList(movies);
-  }
-
-  List<Movie> returnList(List<MDBMovie> movies) {
-    List<Movie> edittedMovies = [];
-
-    movies.forEach((element) {
-      if (element.backdropPath != null) {
-        edittedMovies.add(mapMovie(element));
-      }
-    });
-
-    return edittedMovies;
+    return await _jsonRepo
+        .getCurrentMovies(apiKey)
+        .then((value) => value.where((element) => element.backdropPath != null))
+        .then((value) => value.map((e) => mapMovie(e)))
+        .then((value) => value.toList());
   }
 
   Movie mapMovie(MDBMovie element) {
