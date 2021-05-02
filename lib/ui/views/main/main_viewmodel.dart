@@ -2,7 +2,7 @@ import 'package:movies/app/locator.dart';
 import 'package:movies/data/network/json_repo.dart';
 import 'package:movies/data/network/secret_repo.dart';
 import 'package:movies/domain/movie.dart';
-import 'package:movies/domain/movie_interactor.dart';
+import 'package:movies/domain/main_interactor.dart';
 import 'package:movies/ui/views/base_viewmodel.dart';
 
 /// Represents the state of the view
@@ -16,9 +16,7 @@ class MainViewModel extends BaseViewModel {
   List<Movie> _gridMovies;
   List<Movie> _jumboMovies;
 
-  //Getters
   List<Movie> get gridMovies => _gridMovies;
-
   List<Movie> get currentMovies => _jumboMovies;
 
   onViewCreated() async {

@@ -5,3 +5,4 @@ const YOUTUBE_TRAILER_BASE_URL = "https://www.youtube.com/watch?v=";
 
 const MOVIE_DATABASE_IMAGE_W780 = "http://image.tmdb.org/t/p/w780";
 const MOVIE_DATABASE_IMAGE_W185 = "http://image.tmdb.org/t/p/w185";
+const MOVIE_DB_BASE_IMAGE_W500 = "http://image.tmdb.org/t/p/W500";

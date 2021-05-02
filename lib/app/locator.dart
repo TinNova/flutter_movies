@@ -1,8 +1,8 @@
 import 'package:get_it/get_it.dart';
 import 'package:movies/data/network/json_repo.dart';
 import 'package:movies/data/network/secret_repo.dart';
-import 'package:movies/domain/mappers/MovieMapper.dart';
-import 'package:movies/domain/movie_interactor.dart';
+import 'package:movies/domain/mappers/movie_mapper.dart';
+import 'package:movies/domain/main_interactor.dart';
 import 'package:movies/ui/views/detail/detail_viewmodel.dart';
 import 'package:movies/ui/views/main/main_viewmodel.dart';
 

@@ -10,9 +10,13 @@ const marginGordo = 144.0;
 
 const fontGordo = 32.0;
 const fontLarge = 24.0;
+const fontBig = 20.0;
 const fontMedium = 16.0;
 const font = 12.0;
 
 const marginDetailScreenScore = -80.0;
 const chipHeight = 35.0;
 const trailerPlayArrow = 50.0;
+
+const circleAvatarRadius = 40.0;
+const circleAvatarSize = 80.0;
