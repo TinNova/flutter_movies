@@ -27,21 +27,19 @@ class MDBMovies {
 }
 
 class MDBMovie {
-  String _posterPath = "";
-  bool _adult = false;
-  String _overview = "";
-  String _releaseDate = "";
-  List<int> _genreIds = List.empty();
-  int _id = 0;
-  String _originalTitle = "";
-  String _originalLanguage = "";
-  String _title = "";
-  String? _backdropPath = "";
-  double _popularity = 0.0;
-  int _voteCount = 0;
-  bool _video = false;
-
-//  double voteAverage;
+  String? _posterPath;
+  bool? _adult;
+  String? _overview;
+  String? _releaseDate;
+  List<int>? _genreIds;
+  int? _id;
+  String? _originalTitle;
+  String? _originalLanguage;
+  String? _title;
+  String? _backdropPath;
+  double? _popularity;
+  int? _voteCount;
+  bool? _video;
 
   MDBMovie(
       {posterPath,
@@ -56,9 +54,7 @@ class MDBMovie {
       backdropPath,
       popularity,
       voteCount,
-      video
-//      this.voteAverage
-      });
+      video});
 
   MDBMovie.fromJson(Map<String, dynamic> json) {
     _posterPath = json['poster_path'];
@@ -74,32 +70,31 @@ class MDBMovie {
     _popularity = json['popularity'];
     _voteCount = json['vote_count'];
     _video = json['video'];
-//    voteAverage = json['vote_average'];
   }
 
-  bool get video => _video;
+  bool get video => _video ?? false;
 
-  int get voteCount => _voteCount;
+  int get voteCount => _voteCount ?? 0;
 
-  double get popularity => _popularity;
+  double get popularity => _popularity ?? 0.0;
 
   String get backdropPath => _backdropPath ?? "";
 
-  String get title => _title;
+  String get title => _title ?? "";
 
-  String get originalLanguage => _originalLanguage;
+  String get originalLanguage => _originalLanguage ?? "";
 
-  String get originalTitle => _originalTitle;
+  String get originalTitle => _originalTitle ?? "";
 
-  int get id => _id;
+  int get id => _id ?? 0;
 
-  List<int> get genreIds => _genreIds;
+  List<int> get genreIds => _genreIds ?? List.empty();
 
-  String get releaseDate => _releaseDate;
+  String get releaseDate => _releaseDate ?? "";
 
-  String get overview => _overview;
+  String get overview => _overview ?? "";
 
-  bool get adult => _adult;
+  bool get adult => _adult ?? false;
 
-  String get posterPath => _posterPath;
+  String get posterPath => _posterPath ?? "";
 }
