@@ -1,8 +1,8 @@
 class MDBMovies {
-  int _page;
-  List<MDBMovie> _results;
-  int _totalResults;
-  int _totalPages;
+  int _page = 0;
+  List<MDBMovie> _results = List.empty();
+  int _totalResults = 0;
+  int _totalPages = 0;
 
   MDBMovies({page, results, totalResults, totalPages}) {
     this._page = page;
@@ -16,7 +16,7 @@ class MDBMovies {
   MDBMovies.fromJson(Map<String, dynamic> json) {
     _page = json['page'];
     if (json['results'] != null) {
-      _results = new List<MDBMovie>();
+      _results = <MDBMovie>[];
       json['results'].forEach((v) {
         _results.add(new MDBMovie.fromJson(v));
       });
@@ -27,19 +27,19 @@ class MDBMovies {
 }
 
 class MDBMovie {
-  String _posterPath;
-  bool _adult;
-  String _overview;
-  String _releaseDate;
-  List<int> _genreIds;
-  int _id;
-  String _originalTitle;
-  String _originalLanguage;
-  String _title;
-  String _backdropPath;
-  double _popularity;
-  int _voteCount;
-  bool _video;
+  String _posterPath = "";
+  bool _adult = false;
+  String _overview = "";
+  String _releaseDate = "";
+  List<int> _genreIds = List.empty();
+  int _id = 0;
+  String _originalTitle = "";
+  String _originalLanguage = "";
+  String _title = "";
+  String? _backdropPath = "";
+  double _popularity = 0.0;
+  int _voteCount = 0;
+  bool _video = false;
 
 //  double voteAverage;
 
@@ -83,7 +83,7 @@ class MDBMovie {
 
   double get popularity => _popularity;
 
-  String get backdropPath => _backdropPath;
+  String get backdropPath => _backdropPath ?? "";
 
   String get title => _title;
 

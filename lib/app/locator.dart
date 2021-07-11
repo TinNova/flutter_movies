@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:movies/data/network/json_repo.dart';
 import 'package:movies/data/network/secret_repo.dart';
+import 'package:movies/domain/detail_interactor.dart';
 import 'package:movies/domain/mappers/movie_mapper.dart';
 import 'package:movies/domain/main_interactor.dart';
 import 'package:movies/ui/views/detail/detail_viewmodel.dart';
@@ -20,6 +21,7 @@ void setupLocator() {
 
   // Interactors
   locator.registerFactory(() => MovieInteractor());
+  locator.registerFactory(() => DetailInteractor());
 
   // Repos
   locator.registerLazySingleton(() => SecretRepo(secretPath: "assets/secrets.json"));

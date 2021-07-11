@@ -4,10 +4,10 @@ import 'package:movies/ui/views/base_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class BaseView<T extends BaseViewModel> extends StatefulWidget {
-  final Widget Function(BuildContext context, T model, Widget child) builder;
+  final Widget Function(BuildContext context, T model, Widget? child) builder;
   final Function(T) onViewModelCreated;
 
-  BaseView({this.builder, this.onViewModelCreated});
+  BaseView({required this.builder, required this.onViewModelCreated});
 
   @override
   _BaseViewState<T> createState() => _BaseViewState<T>();
@@ -18,9 +18,7 @@ class _BaseViewState<T extends BaseViewModel> extends State<BaseView<T>> {
 
   @override
   void initState() {
-    if (widget.onViewModelCreated != null) {
-      widget.onViewModelCreated(viewModel);
-    }
+    widget.onViewModelCreated(viewModel);
     super.initState();
   }
 

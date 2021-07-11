@@ -1,5 +1,8 @@
+import 'package:movies/data/models/cast_model.dart';
 import 'package:movies/data/models/movie_detail_model.dart';
+import 'package:movies/data/models/movie_trailer.dart';
 import 'package:movies/data/models/movies.dart';
+import 'package:movies/data/models/review_model.dart';
 
 import '../../consts.dart';
 import '../movie.dart';
@@ -14,24 +17,56 @@ class MovieMapper {
         backdropPath: MOVIE_DATABASE_IMAGE_W780 + element.backdropPath);
   }
 
-  MovieDetail mapMovieDetail(MDBDetailModel element) {
-    return MovieDetail(
-        id: element.id,
-        title: element.title,
-        overview: element.overview,
-        posterPath: element.posterPath,
-        backdropPath: element.backdropPath,
-        genres: mapGenre(element.genres),
-        popularity: element.popularity,
-        releaseDate: element.releaseDate,
-        revenue: element.revenue,
-        runtime: element.runtime,
-        tagline: element.tagline,
-        voteAverage: element.voteAverage,
-        voteCount: element.voteCount);
+  Cast mapCast(MDBCast cast) {
+    return Cast(
+        castId: cast.castId,
+        character: cast.character,
+        id: cast.id,
+        name: cast.name,
+        order: cast.order,
+        profilePath: cast.profilePath);
   }
 
-  List<Genres> mapGenre(List<MDBGenres> elements) {
-    return elements.map((e) => Genres(id: e.id, name: e.name)).toList();
+  Trailer mapTrailer(MDBTrailer trailer) {
+    return Trailer(id: trailer.id, key: trailer.key, thumbnail: trailer.thumbnail, trailerUrl: trailer.trailerUrl);
+  }
+
+  Review mapReview(MDBReview review) {
+    return Review(author: review.author, content: review.content, id: review.id, url: review.url);
+  }
+
+  MovieDetail mapDetail(
+      //List<Cast> casts,
+      // List<Review> reviews,
+      // List<Trailer> trailers,
+      MDBDetailModel movieDetail) {
+    return MovieDetail(
+        id: movieDetail.id,
+        title: cfgheck(movieDetail),
+        overview: movieDetail.overview,
+        posterPath: movieDetail.posterPath,
+        backdropPath: movieDetail.backdropPath,
+        genres: mapGenre(movieDetail.genres),
+        // trailers: trailers,
+        // casts: casts,
+        // reviews: reviews,
+        popularity: movieDetail.popularity,
+        releaseDate: movieDetail.releaseDate,
+        revenue: movieDetail.revenue,
+        runtime: movieDetail.runtime,
+        tagline: movieDetail.tagline,
+        voteAverage: movieDetail.voteAverage,
+        voteCount: movieDetail.voteCount);
+  }
+
+  String cfgheck(MDBDetailModel movieDetail) {
+    if (movieDetail.title.isEmpty)
+      return movieDetail.originalTitle;
+    else
+      return movieDetail.title;
+  }
+
+  List<Genre> mapGenre(List<MDBGenres> elements) {
+    return elements.map((e) => Genre(id: e.id, name: e.name)).toList();
   }
 }

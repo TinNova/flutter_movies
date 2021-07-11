@@ -3,7 +3,7 @@ class MovieTheatre {
   String name;
   String imageUrl;
 
-  MovieTheatre({this.id, this.name, this.imageUrl});
+  MovieTheatre({required this.id, required this.name, required this.imageUrl});
 }
 
 List<MovieTheatre> movies = [

@@ -1,7 +1,7 @@
 class MoviePoster {
   String imageUrl;
 
-  MoviePoster({this.imageUrl});
+  MoviePoster({required this.imageUrl});
 }
 
 List<MoviePoster> posters = [

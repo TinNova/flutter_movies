@@ -10,7 +10,6 @@ class MovieInteractor {
   Future<List<Movie>> getCurrentMovies(String apiKey) async {
     return await _jsonRepo
         .getCurrentMovies(apiKey)
-        .then((value) => value.where((element) => element.backdropPath != null))
         .then((value) => value.map((e) => _movieMapper.mapMovie(e)))
         .then((value) => value.toList());
   }

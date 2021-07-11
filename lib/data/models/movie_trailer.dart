@@ -1,23 +1,23 @@
 import '../../consts.dart';
 
-class MovieTrailer {
-  int _id;
-  List<Trailer> _results;
+class MDBMovieTrailers {
+  int _id = 0;
+  List<MDBTrailer> _results = List.empty();
 
   int get id => _id;
-  List<Trailer> get results => _results;
+  List<MDBTrailer> get results => _results;
 
-  MovieTrailer({int id, List<Trailer> results}) {
+  MDBMovieTrailers({required int id, required List<MDBTrailer> results}) {
     _id = id;
     _results = results;
   }
 
-  MovieTrailer.map(dynamic obj) {
+  MDBMovieTrailers.map(dynamic obj) {
     _id = obj["id"];
     if (obj["results"] != null) {
       _results = [];
       obj["results"].forEach((v) {
-        _results.add(Trailer.map(v));
+        _results.add(MDBTrailer.map(v));
       });
     }
   }
@@ -32,35 +32,49 @@ class MovieTrailer {
   }
 }
 
-class Trailer {
-  String _id;
-  String _key;
-  String _name;
-  String _site;
-  int _size;
-  String _type;
+class MDBTrailer {
+  String _id = "";
+  String _key = "";
+  String _thumbnail = "";
+  String _trailerUrl = "";
+  String _name = "";
+  String _site = "";
+  int _size = 0;
+  String _type = "";
 
   String get id => _id;
   String get key => _key;
-  String get thumbnail => YOUTUBE_THUMBNAIL_START_URL + _key + YOUTUBE_THUMBNAIL_END_URL;
-  String get trailerUrl => YOUTUBE_TRAILER_BASE_URL + _key;
+  String get thumbnail => "random"; //_thumbnail;
+  String get trailerUrl => _trailerUrl;
   String get name => _name;
   String get site => _site;
   int get size => _size;
   String get type => _type;
 
-  Trailer({String id, String key, String name, String site, int size, String type}) {
+  MDBTrailer(
+      {required String id,
+      required String key,
+      required String thumbnail,
+      required String trailerUrl,
+      required String name,
+      required String site,
+      required int size,
+      required String type}) {
     _id = id;
     _key = key;
+    _thumbnail = thumbnail;
+    _trailerUrl = trailerUrl;
     _name = name;
     _site = site;
     _size = size;
     _type = type;
   }
 
-  Trailer.map(dynamic obj) {
+  MDBTrailer.map(dynamic obj) {
     _id = obj["id"];
     _key = obj["key"];
+    _thumbnail = obj["thumbnail"];
+    _trailerUrl = obj["trailerUrl"];
     _name = obj["name"];
     _site = obj["site"];
     _size = obj["size"];
@@ -71,6 +85,8 @@ class Trailer {
     var map = <String, dynamic>{};
     map["id"] = _id;
     map["key"] = _key;
+    map["thumbnail"] = _thumbnail;
+    map["trailerUrl"] = _trailerUrl;
     map["name"] = _name;
     map["site"] = _site;
     map["size"] = _size;

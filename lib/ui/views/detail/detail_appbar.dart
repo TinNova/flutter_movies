@@ -12,8 +12,8 @@ class DetailAppBar implements SliverPersistentHeaderDelegate {
   final double maxExtent;
 
   DetailAppBar({
-    this.minExtent,
-    this.maxExtent,
+    required this.minExtent,
+    required this.maxExtent,
   });
 
   @override
@@ -76,18 +76,18 @@ class DetailAppBar implements SliverPersistentHeaderDelegate {
   }
 
   @override
-  FloatingHeaderSnapConfiguration get snapConfiguration => null;
+  FloatingHeaderSnapConfiguration? get snapConfiguration => null;
 
   @override
-  OverScrollHeaderStretchConfiguration get stretchConfiguration => null;
+  OverScrollHeaderStretchConfiguration? get stretchConfiguration => null;
 
   // don't know what this does, it's mandatory
   @override
   // TODO: implement showOnScreenConfiguration
-  PersistentHeaderShowOnScreenConfiguration get showOnScreenConfiguration => null;
+  PersistentHeaderShowOnScreenConfiguration? get showOnScreenConfiguration => null;
 
   // don't know what this does, it's mandatory
   @override
   // TODO: implement vsync
-  TickerProvider get vsync => null;
+  TickerProvider? get vsync => null;
 }

@@ -1,5 +1,4 @@
 import 'package:movies/app/locator.dart';
-import 'package:movies/data/network/json_repo.dart';
 import 'package:movies/data/network/secret_repo.dart';
 import 'package:movies/domain/movie.dart';
 import 'package:movies/domain/main_interactor.dart';
@@ -12,9 +11,9 @@ class MainViewModel extends BaseViewModel {
   final _movieInteractor = locator<MovieInteractor>();
   final _secretRepo = locator<SecretRepo>();
 
-  String _apiKey;
-  List<Movie> _gridMovies;
-  List<Movie> _jumboMovies;
+  late String _apiKey;
+  List<Movie> _gridMovies = [];
+  List<Movie> _jumboMovies = [];
 
   List<Movie> get gridMovies => _gridMovies;
   List<Movie> get currentMovies => _jumboMovies;

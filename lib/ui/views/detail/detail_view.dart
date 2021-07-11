@@ -19,8 +19,6 @@ class DetailView extends StatefulWidget {
 class _DetailViewState extends State<DetailView> {
   @override
   Widget build(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
-
     return BaseView<DetailViewModel>(
       onViewModelCreated: (detailViewModel) {
         detailViewModel.onViewCreated();
@@ -48,8 +46,16 @@ class _DetailViewState extends State<DetailView> {
                             children: <Widget>[
                               Expanded(
                                   flex: 7,
-                                  child: Text("Star Wars XIX",
-                                      style: GoogleFonts.archivoBlack(fontSize: fontGordo, color: primaryColour))),
+                                  child: Text(detailViewModel.title,
+                                      style: GoogleFonts.archivoBlack(fontSize: fontGordo, color: primaryColour))
+                                  // child: (detailViewModel.title != "")
+                                  //     ? Text(detailViewModel.title,
+                                  //         style: GoogleFonts.archivoBlack(fontSize: fontGordo, color: primaryColour))
+                                  //     : Text("null",
+                                  //         style: GoogleFonts.archivoBlack(fontSize: fontGordo, color: primaryColour))
+                                  // child: Text(detailViewModel.title,
+                                  //     style: GoogleFonts.archivoBlack(fontSize: fontGordo, color: primaryColour))
+                                  ),
                             ],
                           )),
                       Container(
@@ -136,9 +142,10 @@ class _DetailViewState extends State<DetailView> {
                             textAlign: TextAlign.start,
                             style: GoogleFonts.archivoBlack(fontSize: fontMedium, color: primaryColour)),
                       ),
-                      (detailViewModel.trailers != null)
-                          ? TrailerList(detailViewModel.trailers)
-                          : Center(child: CircularProgressIndicator()),
+                      // (detailViewModel.trailers != null)
+                      //     ? TrailerList(detailViewModel.trailers)
+                      //     :
+                      Center(child: CircularProgressIndicator()),
                       Container(
                         alignment: Alignment.topLeft,
                         margin: EdgeInsets.all(margin),

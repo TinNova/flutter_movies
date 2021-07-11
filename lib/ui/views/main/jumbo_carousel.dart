@@ -23,6 +23,7 @@ class JumboCarousel extends StatelessWidget {
         itemCount: currentMovies.length,
         margin: EdgeInsets.all(0.0),
         initialIndex: (currentMovies.length / 2).floorToDouble(),
+        onItemFocus: (int) {},
       ),
     );
   }

@@ -6,7 +6,7 @@ import 'package:movies/data/models/secret.dart';
 class SecretRepo {
   final String secretPath;
 
-  SecretRepo({this.secretPath});
+  SecretRepo({required this.secretPath});
 
   Future<Secret> getApi() {
     return rootBundle.loadStructuredData<Secret>(this.secretPath, (jsonStr) async {

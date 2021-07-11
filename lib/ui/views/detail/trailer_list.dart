@@ -5,7 +5,7 @@ import '../../../colours.dart';
 import '../../../dimens.dart';
 
 class TrailerList extends StatelessWidget {
-  final List<Trailer> trailers;
+  final List<MDBTrailer> trailers;
 
   TrailerList(this.trailers);
 
@@ -19,7 +19,7 @@ class TrailerList extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           itemCount: trailers.length,
           itemBuilder: (BuildContext context, int index) {
-            Trailer trailer = trailers[index];
+            MDBTrailer trailer = trailers[index];
             return Stack(
               alignment: Alignment.center,
               children: <Widget>[
