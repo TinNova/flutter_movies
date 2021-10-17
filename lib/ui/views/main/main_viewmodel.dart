@@ -19,10 +19,15 @@ class MainViewModel extends BaseViewModel {
   List<Movie> get currentMovies => _jumboMovies;
 
   onViewCreated() async {
-    var secret = await _secretRepo.getApi();
-    _apiKey = secret.apiKey;
-    _getPopularMovies();
-    _getJumboMovies();
+    await _secretRepo.getApi()
+        .then((value) => _initScreen(value.apiKey))
+        .onError((error, stackTrace) => null);
+  }
+
+  _initScreen(String apiKey) {
+    _apiKey = apiKey;
+    _getPopularMovies(apiKey);
+    _getJumboMovies(apiKey);
   }
 
   onUpcomingClicked() {
@@ -34,11 +39,11 @@ class MainViewModel extends BaseViewModel {
   }
 
   onPopularClicked() {
-    _getPopularMovies();
+    _getPopularMovies(_apiKey);
   }
 
-  _getJumboMovies() async {
-    _jumboMovies = await _movieInteractor.getCurrentMovies(_apiKey);
+  _getJumboMovies(String apiKey) async {
+    _jumboMovies = await _movieInteractor.getCurrentMovies(apiKey);
     notifyListeners();
   }
 
@@ -47,8 +52,8 @@ class MainViewModel extends BaseViewModel {
     notifyListeners();
   }
 
-  _getPopularMovies() async {
-    _gridMovies = await _movieInteractor.getPopularMovies(_apiKey);
+  _getPopularMovies(String apiKey) async {
+    _gridMovies = await _movieInteractor.getPopularMovies(apiKey);
     notifyListeners();
   }
 
