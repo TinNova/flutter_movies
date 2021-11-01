@@ -38,6 +38,7 @@ class MovieDetail {
 class Genre {
   final int id;
   final String name;
+
   Genre({this.id = 0, this.name = ""});
 }
 
@@ -47,7 +48,11 @@ class Trailer {
   String thumbnail = "";
   String trailerUrl = "";
 
-  Trailer({required this.id, required this.key, required this.thumbnail, required this.trailerUrl});
+  Trailer(
+      {required this.id,
+      required this.key,
+      required this.thumbnail,
+      required this.trailerUrl});
 }
 
 class Cast {
@@ -73,5 +78,9 @@ class Review {
   String id = "";
   String url = "";
 
-  Review({required this.author, required this.content, required this.id, required this.url});
+  Review(
+      {required this.author,
+      required this.content,
+      required this.id,
+      required this.url});
 }

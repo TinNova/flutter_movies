@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:movies/data/models/movies.dart';
 import 'package:movies/dimens.dart';
 import 'package:movies/domain/movie.dart';
 import 'package:movies/ui/views/detail/detail_view.dart';
@@ -17,7 +16,7 @@ class JumboCarousel extends StatelessWidget {
     return Container(
       height: 227.0, // i don't like this number, we need a wrap content instead 195.0, 217.0, 198.0
       child: ScrollSnapList(
-        key: PageStorageKey(MDBMovie),
+        key: PageStorageKey(Movie),
         itemBuilder: _buildListItem,
         itemSize: 365.0,
         itemCount: currentMovies.length,

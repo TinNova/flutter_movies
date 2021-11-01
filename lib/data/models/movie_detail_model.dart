@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class MDBDetailModel {
   bool? _adult;
@@ -87,7 +86,7 @@ class MDBDetailModel {
 
   int get budget => _budget ?? 0;
 
-  List<MDBGenres> get genres => _genres ?? List.empty();
+  List<MDBGenres> get genres => _genres ?? [];
 
   String get homepage => _homepage ?? "";
 

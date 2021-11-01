@@ -1,7 +1,7 @@
 import 'package:movies/data/models/cast_model.dart';
+import 'package:movies/data/models/mdb_movie.dart';
 import 'package:movies/data/models/movie_detail_model.dart';
 import 'package:movies/data/models/movie_trailer.dart';
-import 'package:movies/data/models/movies.dart';
 import 'package:movies/data/models/review_model.dart';
 
 import '../../consts.dart';
@@ -42,7 +42,7 @@ class MovieMapper {
       MDBDetailModel movieDetail) {
     return MovieDetail(
         id: movieDetail.id,
-        title: cfgheck(movieDetail),
+        title: _getTitle(movieDetail),
         overview: movieDetail.overview,
         posterPath: movieDetail.posterPath,
         backdropPath: movieDetail.backdropPath,
@@ -59,7 +59,7 @@ class MovieMapper {
         voteCount: movieDetail.voteCount);
   }
 
-  String cfgheck(MDBDetailModel movieDetail) {
+  String _getTitle(MDBDetailModel movieDetail) {
     if (movieDetail.title.isEmpty)
       return movieDetail.originalTitle;
     else

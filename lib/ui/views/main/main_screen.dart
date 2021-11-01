@@ -41,7 +41,7 @@ class _MainScreenState extends State<MainScreen> {
                                 child: TitleMedium('In Theatres Now'),
                                 padding: EdgeInsets.only(left: 15.0, top: 15.0, right: 15.0, bottom: 0.0),
                               ),
-                              (mainViewModel.currentMovies != null)
+                              (mainViewModel.currentMovies.isNotEmpty)
                                   ? JumboCarousel(mainViewModel.currentMovies)
                                   : Center(child: CircularProgressIndicator()),
                             ],

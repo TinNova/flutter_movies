@@ -1,9 +1,11 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import 'package:movies/data/models/cast_model.dart';
+import 'package:movies/data/models/mdb_movie.dart';
+import 'package:movies/data/models/mdb_movies.dart';
 import 'package:movies/data/models/movie_detail_model.dart';
 import 'package:movies/data/models/movie_trailer.dart';
-import 'package:movies/data/models/movies.dart';
 import 'package:movies/data/models/review_model.dart';
 
 class JsonRepo {
@@ -12,9 +14,9 @@ class JsonRepo {
         .get(Uri.parse('https://api.themoviedb.org/3/movie/now_playing?api_key=$apiKey&language=en-US&page=1'));
 
     if (response.statusCode == 200) {
-      return MDBMovies.fromJson(json.decode(response.body)).results;
+      return MDBMovies.fromJson(json.decode(response.body)).movies;
     } else {
-      throw Exception('Failed to load currentMovies');
+      throw Exception('Failed to load upcomingMovies');
     }
   }
 
@@ -23,7 +25,7 @@ class JsonRepo {
         await http.get(Uri.parse('https://api.themoviedb.org/3/movie/upcoming?api_key=$apiKey&language=en-US&page=1'));
 
     if (response.statusCode == 200) {
-      return MDBMovies.fromJson(json.decode(response.body)).results;
+      return MDBMovies.fromJson(json.decode(response.body)).movies;
     } else {
       throw Exception('Failed to load upcomingMovies');
     }
@@ -34,7 +36,7 @@ class JsonRepo {
         await http.get(Uri.parse('https://api.themoviedb.org/3/movie/top_rated?api_key=$apiKey&language=en-US&page=1'));
 
     if (response.statusCode == 200) {
-      return MDBMovies.fromJson(json.decode(response.body)).results;
+      return MDBMovies.fromJson(json.decode(response.body)).movies;
     } else {
       throw Exception('Failed to load topRateMovies');
     }
@@ -45,7 +47,7 @@ class JsonRepo {
         await http.get(Uri.parse('https://api.themoviedb.org/3/movie/popular?api_key=$apiKey&language=en-US&page=1'));
 
     if (response.statusCode == 200) {
-      return MDBMovies.fromJson(json.decode(response.body)).results;
+      return MDBMovies.fromJson(json.decode(response.body)).movies;
     } else {
       throw Exception('Failed to load popularMovies');
     }
