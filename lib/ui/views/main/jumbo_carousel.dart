@@ -14,7 +14,10 @@ class JumboCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 227.0, // i don't like this number, we need a wrap content instead 195.0, 217.0, 198.0
+      //todo: Try have a dynamic height based on screen size
+      // i don't like this number, we need a wrap content instead 195.0, 217.0, 198.0
+      // Solution could be to get the height of the screen and make this 20% of the height when in portrait mode
+      height: 227.0,
       child: ScrollSnapList(
         key: PageStorageKey(Movie),
         itemBuilder: _buildListItem,

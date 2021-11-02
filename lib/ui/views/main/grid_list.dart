@@ -29,9 +29,6 @@ class GridList extends StatelessWidget {
                   shadowColor: Colors.black,
                   shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
                   margin: EdgeInsets.all(0.0),
-//                  child: FadeInImage.assetNetwork(
-//                      placeholder: 'assets/images/poster_starwars.jpg',
-//                      image: 'http://image.tmdb.org/t/p/w185' + movie.posterPath),
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(image: NetworkImage(movie.posterPath)),

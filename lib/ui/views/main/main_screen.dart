@@ -65,7 +65,7 @@ class _MainScreenState extends State<MainScreen> {
                                   child: GestureDetector(
                                     child: TitleMedium('Upcoming'),
                                     onTap: () {
-                                      mainViewModel.onUpcomingClicked(); // Here we are changing data in the ViewModel
+                                      mainViewModel.onUpcomingClicked();
                                     },
                                   ),
                                 ),
@@ -75,7 +75,6 @@ class _MainScreenState extends State<MainScreen> {
                                     child: TitleMedium('Top rated'),
                                     onTap: () {
                                       mainViewModel.onTopRatedClicked();
-//                                      mainViewModel.onFilmCategoryClicked(FilmCategory.TOP_RATED);
                                     },
                                   ),
                                 ),
@@ -84,9 +83,7 @@ class _MainScreenState extends State<MainScreen> {
                                   child: GestureDetector(
                                     child: TitleMedium('Popular'),
                                     onTap: () {
-//                                      Provider.of<MainViewModel>(context).onPopularClicked();
-                                      mainViewModel.onPopularClicked(); // Here we are changing data in the ViewModel
-//                                      mainViewModel.onFilmCategoryClicked(FilmCategory.POPULAR);
+                                      mainViewModel.onPopularClicked();
                                     },
                                   ),
                                 ),
