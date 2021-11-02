@@ -1,4 +1,5 @@
 import 'package:movies/app/locator.dart';
+import 'package:movies/consts.dart';
 import 'package:movies/data/network/secret_repo.dart';
 import 'package:movies/domain/movie.dart';
 import 'package:movies/domain/main_interactor.dart';
@@ -43,22 +44,22 @@ class MainViewModel extends BaseViewModel {
   }
 
   _getJumboMovies(String apiKey) async {
-    _jumboMovies = await _movieInteractor.getCurrentMovies(apiKey);
+    _jumboMovies = await _movieInteractor.getMovies(apiKey, NOW_PLAYING);
     notifyListeners();
   }
 
   _getUpcomingMovies() async {
-    _gridMovies = await _movieInteractor.getUpcomingMovies(_apiKey);
+    _gridMovies = await _movieInteractor.getMovies(_apiKey, UPCOMING);
     notifyListeners();
   }
 
   _getPopularMovies(String apiKey) async {
-    _gridMovies = await _movieInteractor.getPopularMovies(apiKey);
+    _gridMovies = await _movieInteractor.getMovies(apiKey, POPULAR);
     notifyListeners();
   }
 
   _getTopRatedMovies() async {
-    _gridMovies = await _movieInteractor.getTopRatedMovies(_apiKey);
+    _gridMovies = await _movieInteractor.getMovies(_apiKey, TOP_RATED);
     notifyListeners();
   }
 }
