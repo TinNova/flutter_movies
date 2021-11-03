@@ -6,9 +6,10 @@ import 'package:movies/data/models/mdb_actors.dart';
 import 'package:movies/data/models/mdb_detail.dart';
 import 'package:movies/data/models/mdb_movie.dart';
 import 'package:movies/data/models/mdb_movies.dart';
+import 'package:movies/data/models/mdb_review.dart';
+import 'package:movies/data/models/mdb_reviews.dart';
 import 'package:movies/data/models/mdb_trailer.dart';
 import 'package:movies/data/models/mdb_trailers.dart';
-import 'package:movies/data/models/review_model.dart';
 
 List<MDBMovie> parseMovies(String responseBody) =>
     MDBMovies.fromJson(json.decode(responseBody)).movies;
@@ -20,6 +21,9 @@ MDBDetail parseDetail(String responseBody) => MDBDetail.fromJson(json.decode(res
 
 List<MDBTrailer> parseTrailers(String responseBody) =>
     MDBTrailers.fromJson(json.decode(responseBody)).trailers;
+
+List<MDBReview> parseReviews(String responseBody) =>
+    MDBReviews.fromJson(json.decode(responseBody)).reviews;
 
 class JsonRepo {
   Future<List<MDBMovie>> getMovies(String apiKey, String moviePath) async {
@@ -55,7 +59,7 @@ class JsonRepo {
     }
   }
 
-  Future<List<MDBActor>> getCasts(String apiKey, int movieId) async {
+  Future<List<MDBActor>> getActors(String apiKey, int movieId) async {
     http.Response response = await http
         .get(Uri.parse("https://api.themoviedb.org/3/movie/$movieId/credits?api_key=$apiKey"));
 
@@ -71,7 +75,7 @@ class JsonRepo {
         .get(Uri.parse("https://api.themoviedb.org/3/movie/$movieId/reviews?api_key=$apiKey"));
 
     if (response.statusCode == 200) {
-      return MovieReviewModel.map(json.decode(response.body)).reviews;
+      return compute(parseReviews, response.body);
     } else {
       throw Exception("Failed to load Reviews");
     }
