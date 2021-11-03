@@ -6,7 +6,8 @@ import 'package:movies/data/models/mdb_actors.dart';
 import 'package:movies/data/models/mdb_detail.dart';
 import 'package:movies/data/models/mdb_movie.dart';
 import 'package:movies/data/models/mdb_movies.dart';
-import 'package:movies/data/models/movie_trailer.dart';
+import 'package:movies/data/models/mdb_trailer.dart';
+import 'package:movies/data/models/mdb_trailers.dart';
 import 'package:movies/data/models/review_model.dart';
 
 List<MDBMovie> parseMovies(String responseBody) =>
@@ -16,6 +17,9 @@ List<MDBActor> parseActors(String responseBody) =>
     MDBActors.fromJson(json.decode(responseBody)).actors;
 
 MDBDetail parseDetail(String responseBody) => MDBDetail.fromJson(json.decode(responseBody));
+
+List<MDBTrailer> parseTrailers(String responseBody) =>
+    MDBTrailers.fromJson(json.decode(responseBody)).trailers;
 
 class JsonRepo {
   Future<List<MDBMovie>> getMovies(String apiKey, String moviePath) async {
@@ -45,7 +49,7 @@ class JsonRepo {
         "https://api.themoviedb.org/3/movie/$movieId/videos?api_key=$apiKey&language=en-US"));
 
     if (response.statusCode == 200) {
-      return MDBMovieTrailers.map(json.decode(response.body)).results;
+      return compute(parseTrailers, response.body);
     } else {
       throw Exception('Failed to load Trailers');
     }

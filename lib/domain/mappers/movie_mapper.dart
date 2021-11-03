@@ -1,7 +1,7 @@
 import 'package:movies/data/models/mdb_actor.dart';
 import 'package:movies/data/models/mdb_detail.dart';
 import 'package:movies/data/models/mdb_movie.dart';
-import 'package:movies/data/models/movie_trailer.dart';
+import 'package:movies/data/models/mdb_trailer.dart';
 import 'package:movies/data/models/review_model.dart';
 
 import '../../consts.dart';
@@ -28,7 +28,11 @@ class MovieMapper {
   }
 
   Trailer mapTrailer(MDBTrailer trailer) {
-    return Trailer(id: trailer.id, key: trailer.key, thumbnail: trailer.thumbnail, trailerUrl: trailer.trailerUrl);
+    return Trailer(
+        id: trailer.id,
+        key: trailer.key,
+        thumbnail: YOUTUBE_THUMBNAIL_START_URL + trailer.key + YOUTUBE_THUMBNAIL_END_URL,
+        trailerUrl: YOUTUBE_TRAILER_BASE_URL + trailer.key);
   }
 
   Review mapReview(MDBReview review) {
