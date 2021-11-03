@@ -1,6 +1,6 @@
-import 'package:movies/data/models/cast_model.dart';
+import 'package:movies/data/models/mdb_actor.dart';
+import 'package:movies/data/models/mdb_detail.dart';
 import 'package:movies/data/models/mdb_movie.dart';
-import 'package:movies/data/models/movie_detail_model.dart';
 import 'package:movies/data/models/movie_trailer.dart';
 import 'package:movies/data/models/review_model.dart';
 
@@ -17,14 +17,14 @@ class MovieMapper {
         backdropPath: MOVIE_DATABASE_IMAGE_W780 + element.backdropPath);
   }
 
-  Cast mapCast(MDBCast cast) {
+  Cast mapCast(MDBActor actor) {
     return Cast(
-        castId: cast.castId,
-        character: cast.character,
-        id: cast.id,
-        name: cast.name,
-        order: cast.order,
-        profilePath: cast.profilePath);
+        castId: actor.castId,
+        character: actor.character,
+        id: actor.id,
+        name: actor.name,
+        order: actor.order,
+        profilePath: actor.profilePath);
   }
 
   Trailer mapTrailer(MDBTrailer trailer) {
@@ -39,14 +39,14 @@ class MovieMapper {
       //List<Cast> casts,
       // List<Review> reviews,
       // List<Trailer> trailers,
-      MDBDetailModel movieDetail) {
+      MDBDetail movieDetail) {
     return MovieDetail(
         id: movieDetail.id,
-        title: _getTitle(movieDetail),
+        title: movieDetail.title,
         overview: movieDetail.overview,
         posterPath: movieDetail.posterPath,
         backdropPath: movieDetail.backdropPath,
-        genres: mapGenre(movieDetail.genres),
+        // genres: mapGenre(movieDetail.genres),
         // trailers: trailers,
         // casts: casts,
         // reviews: reviews,
@@ -59,14 +59,7 @@ class MovieMapper {
         voteCount: movieDetail.voteCount);
   }
 
-  String _getTitle(MDBDetailModel movieDetail) {
-    if (movieDetail.title.isEmpty)
-      return movieDetail.originalTitle;
-    else
-      return movieDetail.title;
-  }
-
-  List<Genre> mapGenre(List<MDBGenres> elements) {
-    return elements.map((e) => Genre(id: e.id, name: e.name)).toList();
-  }
+  // List<Genre> mapGenre(List<MDBGenres> elements) {
+  //   return elements.map((e) => Genre(id: e.id, name: e.name)).toList();
+  // }
 }

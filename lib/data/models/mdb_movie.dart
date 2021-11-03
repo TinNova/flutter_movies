@@ -5,33 +5,22 @@ part 'mdb_movie.g.dart';
 @JsonSerializable()
 class MDBMovie {
   final bool adult;
-
-  @JsonKey(name: "poster_path")
-  @JsonKey(defaultValue: "")
+  @JsonKey(name: "poster_path", defaultValue: "")
   final String posterPath;
-
   final String overview;
-
   @JsonKey(name: "release_date")
   final String releaseDate;
-
   @JsonKey(name: "genre_ids")
   final List<int> genreIds;
-
   final int id;
-
   @JsonKey(name: "original_title")
   final String originalTitle;
-
   @JsonKey(name: "original_language")
   final String originalLanguage;
   final String title;
-
-  @JsonKey(name: "backdrop_path")
-  @JsonKey(defaultValue: "")
+  @JsonKey(name: "backdrop_path", defaultValue: "")
   final String backdropPath;
   final double popularity;
-
   @JsonKey(name: "vote_count")
   final int voteCount;
   final bool video;
