@@ -1,3 +1,6 @@
+import 'package:movies/data/models/mdb_actor.dart';
+import 'package:movies/data/models/mdb_review.dart';
+
 class MovieDetail {
   final int id;
   final String title;
@@ -5,9 +8,9 @@ class MovieDetail {
   final String posterPath;
   final String backdropPath;
   final List<Genre>? genres;
-  final List<Trailer>? trailers;
-  final List<Cast>? casts;
-  final List<Review>? reviews;
+  final List<Trailer> trailers;
+  final List<MDBActor> actors;
+  final List<MDBReview> reviews;
   final double popularity;
   final String releaseDate;
   final int revenue;
@@ -23,9 +26,9 @@ class MovieDetail {
       this.posterPath = "",
       this.backdropPath = "",
       this.genres,
-      this.trailers,
-      this.casts,
-      this.reviews,
+      required this.trailers,
+      required this.actors,
+      required this.reviews,
       this.popularity = 0.0,
       this.releaseDate = "",
       this.revenue = 0,
@@ -53,34 +56,4 @@ class Trailer {
       required this.key,
       required this.thumbnail,
       required this.trailerUrl});
-}
-
-class Cast {
-  int castId = 0;
-  String character = "";
-  int id = 0;
-  String name = "";
-  int order = 0;
-  String profilePath = "";
-
-  Cast(
-      {required this.castId,
-      required this.character,
-      required this.id,
-      required this.name,
-      required this.order,
-      required this.profilePath});
-}
-
-class Review {
-  String author = "";
-  String content = "";
-  String id = "";
-  String url = "";
-
-  Review(
-      {required this.author,
-      required this.content,
-      required this.id,
-      required this.url});
 }

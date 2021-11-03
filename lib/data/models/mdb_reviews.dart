@@ -8,6 +8,7 @@ part 'mdb_reviews.g.dart';
 class MDBReviews {
   // int id = 0;
   // int page = 0;
+  @JsonKey(name: 'results')
   final List<MDBReview> reviews;
   // int totalPages = 0;
   // int totalResults = 0;

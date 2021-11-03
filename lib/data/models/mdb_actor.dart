@@ -13,7 +13,7 @@ class MDBActor {
   final int castId;
   final String name;
   final int order;
-  @JsonKey(name: 'profile_path')
+  @JsonKey(name: 'profile_path', defaultValue: "")
   final String profilePath;
 
   MDBActor({required this.castId,

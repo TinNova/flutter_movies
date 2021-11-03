@@ -1,6 +1,7 @@
 import 'package:movies/data/models/mdb_actor.dart';
 import 'package:movies/data/models/mdb_detail.dart';
 import 'package:movies/data/models/mdb_movie.dart';
+import 'package:movies/data/models/mdb_review.dart';
 import 'package:movies/data/models/mdb_trailer.dart';
 
 import '../../consts.dart';
@@ -16,16 +17,6 @@ class MovieMapper {
         backdropPath: MOVIE_DATABASE_IMAGE_W780 + element.backdropPath);
   }
 
-  Cast mapCast(MDBActor actor) {
-    return Cast(
-        castId: actor.castId,
-        character: actor.character,
-        id: actor.id,
-        name: actor.name,
-        order: actor.order,
-        profilePath: actor.profilePath);
-  }
-
   Trailer mapTrailer(MDBTrailer trailer) {
     return Trailer(
         id: trailer.id,
@@ -35,9 +26,9 @@ class MovieMapper {
   }
 
   MovieDetail mapDetail(
-      //List<Cast> casts,
-      // List<Review> reviews,
-      // List<Trailer> trailers,
+      List<MDBActor> actors,
+      List<MDBReview> reviews,
+      List<Trailer> trailers,
       MDBDetail movieDetail) {
     return MovieDetail(
         id: movieDetail.id,
@@ -46,9 +37,9 @@ class MovieMapper {
         posterPath: movieDetail.posterPath,
         backdropPath: movieDetail.backdropPath,
         // genres: mapGenre(movieDetail.genres),
-        // trailers: trailers,
-        // casts: casts,
-        // reviews: reviews,
+        trailers: trailers,
+        actors: actors,
+        reviews: reviews,
         popularity: movieDetail.popularity,
         releaseDate: movieDetail.releaseDate,
         revenue: movieDetail.revenue,
