@@ -8,8 +8,8 @@ class DetailInteractor {
   final _movieMapper = locator<MovieMapper>();
 
   Future<MovieDetail> getDetail(String apiKey, int movieId) async {
-    final actors = await _jsonRepo
-        .getActors(apiKey, movieId);
+    final credits = await _jsonRepo
+        .getCredits(apiKey, movieId);
 
     final reviews = await _jsonRepo
         .getReviews(apiKey, movieId);
@@ -22,7 +22,7 @@ class DetailInteractor {
     final movieDetail = await _jsonRepo.getDetail(apiKey, movieId);
 
     return _movieMapper.mapDetail(
-        actors,
+        credits,
         reviews,
         trailers,
         movieDetail);

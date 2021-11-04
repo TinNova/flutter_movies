@@ -1,4 +1,5 @@
 import 'package:movies/data/models/mdb_actor.dart';
+import 'package:movies/data/models/mdb_crew.dart';
 import 'package:movies/data/models/mdb_review.dart';
 
 class MovieDetail {
@@ -10,6 +11,7 @@ class MovieDetail {
   final List<Genre>? genres;
   final List<Trailer> trailers;
   final List<MDBActor> actors;
+  final String directors;
   final List<MDBReview> reviews;
   final double popularity;
   final String releaseDate;
@@ -28,6 +30,7 @@ class MovieDetail {
       this.genres,
       required this.trailers,
       required this.actors,
+      this.directors = "",
       required this.reviews,
       this.popularity = 0.0,
       this.releaseDate = "",
@@ -51,9 +54,5 @@ class Trailer {
   String thumbnail = "";
   String trailerUrl = "";
 
-  Trailer(
-      {required this.id,
-      required this.key,
-      required this.thumbnail,
-      required this.trailerUrl});
+  Trailer({required this.id, required this.key, required this.thumbnail, required this.trailerUrl});
 }

@@ -1,4 +1,6 @@
 import 'package:movies/data/models/mdb_actor.dart';
+import 'package:movies/data/models/mdb_credits.dart';
+import 'package:movies/data/models/mdb_crew.dart';
 import 'package:movies/data/models/mdb_detail.dart';
 import 'package:movies/data/models/mdb_movie.dart';
 import 'package:movies/data/models/mdb_review.dart';
@@ -26,10 +28,7 @@ class MovieMapper {
   }
 
   MovieDetail mapDetail(
-      List<MDBActor> actors,
-      List<MDBReview> reviews,
-      List<Trailer> trailers,
-      MDBDetail movieDetail) {
+      MDBCredits credits, List<MDBReview> reviews, List<Trailer> trailers, MDBDetail movieDetail) {
     return MovieDetail(
         id: movieDetail.id,
         title: movieDetail.title,
@@ -38,7 +37,8 @@ class MovieMapper {
         backdropPath: movieDetail.backdropPath,
         // genres: mapGenre(movieDetail.genres),
         trailers: trailers,
-        actors: actors,
+        actors: credits.actors,
+        directors: getDirectors(credits.crew),
         reviews: reviews,
         popularity: movieDetail.popularity,
         releaseDate: movieDetail.releaseDate,
@@ -49,7 +49,16 @@ class MovieMapper {
         voteCount: movieDetail.voteCount);
   }
 
-  // List<Genre> mapGenre(List<MDBGenres> elements) {
-  //   return elements.map((e) => Genre(id: e.id, name: e.name)).toList();
-  // }
+  String getDirectors(List<MDBCrew> crew) {
+    return PREFIX_DIRECTOR +
+        crew
+            .where((e) => e.job == "Director")
+            .toList()
+            .map((e) => e.name)
+            .join(", ");
+  }
+
+// List<Genre> mapGenre(List<MDBGenres> elements) {
+//   return elements.map((e) => Genre(id: e.id, name: e.name)).toList();
+// }
 }

@@ -12,3 +12,6 @@ const NOW_PLAYING = "now_playing";
 const UPCOMING = "upcoming";
 const TOP_RATED = "top_rated";
 const POPULAR = "popular";
+
+const PREFIX_DIRECTOR = "By ";
+
