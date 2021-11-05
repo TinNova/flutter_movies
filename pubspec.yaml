@@ -10,6 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
+  jiffy: ^4.1.0
   cupertino_icons: ^1.0.3
   scroll_snap_list: ^0.8.4
 

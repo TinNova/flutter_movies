@@ -1,22 +1,25 @@
-import 'package:movies/data/models/mdb_actor.dart';
+import 'package:movies/app/locator.dart';
 import 'package:movies/data/models/mdb_credits.dart';
 import 'package:movies/data/models/mdb_crew.dart';
 import 'package:movies/data/models/mdb_detail.dart';
 import 'package:movies/data/models/mdb_movie.dart';
 import 'package:movies/data/models/mdb_review.dart';
 import 'package:movies/data/models/mdb_trailer.dart';
+import 'package:movies/domain/mappers/date_time_mapper.dart';
 
 import '../../consts.dart';
 import '../movie.dart';
 import '../movie_detail.dart';
 
 class MovieMapper {
+  final _dateTimeMapper = locator<DateTimeMapper>();
+
   Movie mapMovie(MDBMovie element) {
     return Movie(
         id: element.id,
         title: element.title,
-        posterPath: MOVIE_DATABASE_IMAGE_W185 + element.posterPath,
-        backdropPath: MOVIE_DATABASE_IMAGE_W780 + element.backdropPath);
+        posterPath: MOVIE_DATABASE_IMAGE_POSTER + element.posterPath,
+        backdropPath: MOVIE_DATABASE_IMAGE_BACKDROP + element.backdropPath);
   }
 
   Trailer mapTrailer(MDBTrailer trailer) {
@@ -41,9 +44,9 @@ class MovieMapper {
         directors: getDirectors(credits.crew),
         reviews: reviews,
         popularity: movieDetail.popularity,
-        releaseDate: movieDetail.releaseDate,
+        releaseDate: _dateTimeMapper.formatDate(movieDetail.releaseDate, YYYYMMDD_FORMAT, DDMMMYYYY_FORMAT),
         revenue: movieDetail.revenue,
-        runtime: movieDetail.runtime,
+        runtime: _dateTimeMapper.getTimeString(movieDetail.runtime),
         tagline: movieDetail.tagline,
         voteAverage: movieDetail.voteAverage,
         voteCount: movieDetail.voteCount);
@@ -57,6 +60,8 @@ class MovieMapper {
             .map((e) => e.name)
             .join(", ");
   }
+
+
 
 // List<Genre> mapGenre(List<MDBGenres> elements) {
 //   return elements.map((e) => Genre(id: e.id, name: e.name)).toList();

@@ -16,7 +16,7 @@ class MovieDetail {
   final double popularity;
   final String releaseDate;
   final int revenue;
-  final int runtime;
+  final String runtime;
   final String tagline;
   final double voteAverage;
   final int voteCount;
@@ -35,7 +35,7 @@ class MovieDetail {
       this.popularity = 0.0,
       this.releaseDate = "",
       this.revenue = 0,
-      this.runtime = 0,
+      this.runtime = "",
       this.tagline = "",
       this.voteAverage = 0.0,
       this.voteCount = 0});

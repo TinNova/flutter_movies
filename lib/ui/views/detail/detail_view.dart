@@ -46,23 +46,17 @@ class _DetailViewState extends State<DetailView> {
                             children: <Widget>[
                               Expanded(
                                   flex: 7,
-                                  child: Text(detailViewModel.title,
-                                      style: GoogleFonts.archivoBlack(fontSize: fontGordo, color: primaryColour))
-                                  // child: (detailViewModel.title != "")
-                                  //     ? Text(detailViewModel.title,
-                                  //         style: GoogleFonts.archivoBlack(fontSize: fontGordo, color: primaryColour))
-                                  //     : Text("null",
-                                  //         style: GoogleFonts.archivoBlack(fontSize: fontGordo, color: primaryColour))
-                                  // child: Text(detailViewModel.title,
-                                  //     style: GoogleFonts.archivoBlack(fontSize: fontGordo, color: primaryColour))
-                                  ),
+                                  child: Text(detailViewModel.detail.title,
+                                      style: GoogleFonts.archivoBlack(
+                                          fontSize: fontGordo, color: primaryColour))),
                             ],
                           )),
                       Container(
                         alignment: Alignment.topLeft,
                         margin: EdgeInsets.only(left: margin, top: margin, right: marginGordo),
-                        child: Text("By Joe Russo, Anthony Russo",
-                            style: GoogleFonts.tenorSans(fontSize: fontMedium, color: Colors.black)),
+                        child: Text(detailViewModel.detail.directors,
+                            style:
+                                GoogleFonts.tenorSans(fontSize: fontMedium, color: Colors.black)),
                       ),
                       Container(
                         height: chipHeight,
@@ -85,27 +79,24 @@ class _DetailViewState extends State<DetailView> {
                       Container(
                         padding: EdgeInsets.only(left: margin, right: margin),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             Row(
                               children: <Widget>[
                                 Icon(Icons.calendar_today, color: primaryColour),
                                 SizedBox(width: marginSmall),
-                                Text("04/27/2018"),
+                                Text(detailViewModel.detail.releaseDate),
                                 SizedBox(width: marginHalf),
-                                Text("(US)")
+                                //Text("(US)")
                               ],
                             ),
                             Row(
                               children: <Widget>[
                                 Icon(Icons.access_time, color: primaryColour),
                                 SizedBox(width: marginSmall),
-                                Text("2h 29m")
+                                Text(detailViewModel.detail.runtime)
                               ],
                             ),
-                            Chip(
-                              label: Text("PG-13"),
-                            )
                           ],
                         ),
                       ),
@@ -118,40 +109,44 @@ class _DetailViewState extends State<DetailView> {
                       Container(
                         alignment: Alignment.topLeft,
                         margin: EdgeInsets.only(left: margin, right: margin, top: margin),
-                        child: Text("An entire universe. Once and for all.",
+                        child: Text(detailViewModel.detail.tagline,
                             textAlign: TextAlign.start,
-                            style: GoogleFonts.archivoBlack(fontSize: fontMedium, color: primaryBlack)),
+                            style: GoogleFonts.archivoBlack(
+                                fontSize: fontMedium, color: primaryBlack)),
                       ),
                       Container(
                         alignment: Alignment.topLeft,
                         margin: EdgeInsets.only(left: margin, right: margin, top: margin),
                         child: Text("Overview",
-                            style: GoogleFonts.archivoBlack(fontSize: fontLarge, color: primaryColour)),
+                            style: GoogleFonts.archivoBlack(
+                                fontSize: fontLarge, color: primaryColour)),
                       ),
                       Container(
                         alignment: Alignment.topLeft,
                         margin: EdgeInsets.only(left: margin, right: margin, top: margin),
-                        child: Text(
-                            "As the Avengers and their allies have continued to protect the world from threats too large for any one hero to handle, a new danger has emerged from the cosmic shadows: Thanos. A despot of intergalactic infamy, his goal is to collect all six Infinity Stones, artifacts of unimaginable power, and use them to inflict his twisted will on all of reality. Everything the Avengers have fought for has led up to this moment - the fate of Earth and existence itself has never been more uncertain.",
-                            style: GoogleFonts.tenorSans(fontSize: fontMedium, color: primaryColour)),
+                        child: Text(detailViewModel.detail.overview,
+                            style:
+                                GoogleFonts.tenorSans(fontSize: fontMedium, color: primaryColour)),
                       ),
                       Container(
                         alignment: Alignment.topLeft,
-                        margin: EdgeInsets.only(left: margin, right: margin, top: margin, bottom: margin),
+                        margin: EdgeInsets.only(
+                            left: margin, right: margin, top: margin, bottom: margin),
                         child: Text("Trailers",
                             textAlign: TextAlign.start,
-                            style: GoogleFonts.archivoBlack(fontSize: fontMedium, color: primaryColour)),
+                            style: GoogleFonts.archivoBlack(
+                                fontSize: fontMedium, color: primaryColour)),
                       ),
-                      // (detailViewModel.trailers != null)
-                      //     ? TrailerList(detailViewModel.trailers)
-                      //     :
-                      Center(child: CircularProgressIndicator()),
+                      (detailViewModel.detail.trailers.isNotEmpty)
+                          ? TrailerList(detailViewModel.detail.trailers)
+                          : Center(child: CircularProgressIndicator()),
                       Container(
                         alignment: Alignment.topLeft,
                         margin: EdgeInsets.all(margin),
                         child: Text("Cast",
                             textAlign: TextAlign.start,
-                            style: GoogleFonts.archivoBlack(fontSize: fontMedium, color: primaryColour)),
+                            style: GoogleFonts.archivoBlack(
+                                fontSize: fontMedium, color: primaryColour)),
                       ),
                       Divider(
                         height: 1.0,
@@ -164,7 +159,8 @@ class _DetailViewState extends State<DetailView> {
                         margin: EdgeInsets.all(margin),
                         child: Text("Reviews",
                             textAlign: TextAlign.start,
-                            style: GoogleFonts.archivoBlack(fontSize: fontLarge, color: primaryColour)),
+                            style: GoogleFonts.archivoBlack(
+                                fontSize: fontLarge, color: primaryColour)),
                       ),
                     ],
                   ),
@@ -176,8 +172,8 @@ class _DetailViewState extends State<DetailView> {
   }
 
   List<String> genres = <String>[
-    "ScienceFiction",
-    "Adventure",
+    "changeMe",
+    "changeMe",
     "ScienceFiction",
     "Adventure",
     "ScienceFiction",
