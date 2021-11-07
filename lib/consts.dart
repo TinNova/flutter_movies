@@ -5,7 +5,7 @@ const YOUTUBE_TRAILER_BASE_URL = "https://www.youtube.com/watch?v=";
 
 const MOVIE_DATABASE_IMAGE_BACKDROP = "http://image.tmdb.org/t/p/w300";
 const MOVIE_DATABASE_IMAGE_POSTER = "http://image.tmdb.org/t/p/w154";
-const MOVIE_DB_BASE_IMAGE_W500 = "http://image.tmdb.org/t/p/W500";
+const MOVIE_DB_BASE_IMAGE_POSTER_DETAIL = "http://image.tmdb.org/t/p/w500";
 
 /// Movie API Paths
 const NOW_PLAYING = "now_playing";

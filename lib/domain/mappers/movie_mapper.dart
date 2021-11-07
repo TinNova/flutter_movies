@@ -36,7 +36,7 @@ class MovieMapper {
         id: movieDetail.id,
         title: movieDetail.title,
         overview: movieDetail.overview,
-        posterPath: movieDetail.posterPath,
+        posterPath: MOVIE_DB_BASE_IMAGE_POSTER_DETAIL + movieDetail.posterPath,
         backdropPath: movieDetail.backdropPath,
         // genres: mapGenre(movieDetail.genres),
         trailers: trailers,

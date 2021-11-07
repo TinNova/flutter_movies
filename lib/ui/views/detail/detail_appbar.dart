@@ -8,13 +8,11 @@ import '../../../colours.dart';
 import '../../../dimens.dart';
 
 class DetailAppBar implements SliverPersistentHeaderDelegate {
-  final double minExtent;
-  final double maxExtent;
+  final double minExtent = 150.0;
+  final double maxExtent = 500.0;
+  final String posterPath;
 
-  DetailAppBar({
-    required this.minExtent,
-    required this.maxExtent,
-  });
+  DetailAppBar(this.posterPath);
 
   @override
   Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
@@ -27,7 +25,7 @@ class DetailAppBar implements SliverPersistentHeaderDelegate {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.only(
                 bottomLeft: Radius.circular(borderRadius), bottomRight: Radius.circular(borderRadius)),
-            image: DecorationImage(image: AssetImage("assets/images/poster_starwars.jpg"), fit: BoxFit.cover),
+            image: DecorationImage(image: NetworkImage(posterPath), fit: BoxFit.cover),
           ),
         ),
         Positioned(

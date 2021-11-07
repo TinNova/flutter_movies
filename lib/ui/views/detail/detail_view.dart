@@ -23,10 +23,10 @@ class _DetailViewState extends State<DetailView> {
     final args = ModalRoute.of(context)!.settings.arguments as MainToDetailArgs;
 
     return BaseView<DetailViewModel>(
-      onViewModelCreated: (detailViewModel) {
-        detailViewModel.onViewCreated(args.movieId);
+      onViewModelCreated: (viewModel) {
+        viewModel.onViewCreated(args.movieId);
       },
-      builder: (context, detailViewModel, child) => Scaffold(
+      builder: (context, viewModel, child) => Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: Colors.white,
           body: CustomScrollView(
@@ -34,7 +34,7 @@ class _DetailViewState extends State<DetailView> {
               SliverPersistentHeader(
                 pinned: true,
                 floating: false,
-                delegate: DetailAppBar(minExtent: 150.0, maxExtent: 500.0),
+                delegate: DetailAppBar(viewModel.detail.posterPath),
               ),
               SliverFillRemaining(
                 hasScrollBody: false,
@@ -49,7 +49,7 @@ class _DetailViewState extends State<DetailView> {
                             children: <Widget>[
                               Expanded(
                                   flex: 7,
-                                  child: Text(detailViewModel.detail.title,
+                                  child: Text(viewModel.detail.title,
                                       style: GoogleFonts.archivoBlack(
                                           fontSize: fontGordo, color: primaryColour))),
                             ],
@@ -57,7 +57,7 @@ class _DetailViewState extends State<DetailView> {
                       Container(
                         alignment: Alignment.topLeft,
                         margin: EdgeInsets.only(left: margin, top: margin, right: marginGordo),
-                        child: Text(detailViewModel.detail.directors,
+                        child: Text(viewModel.detail.directors,
                             style:
                                 GoogleFonts.tenorSans(fontSize: fontMedium, color: Colors.black)),
                       ),
@@ -88,7 +88,7 @@ class _DetailViewState extends State<DetailView> {
                               children: <Widget>[
                                 Icon(Icons.calendar_today, color: primaryColour),
                                 SizedBox(width: marginSmall),
-                                Text(detailViewModel.detail.releaseDate),
+                                Text(viewModel.detail.releaseDate),
                                 SizedBox(width: marginHalf),
                                 //Text("(US)")
                               ],
@@ -97,7 +97,7 @@ class _DetailViewState extends State<DetailView> {
                               children: <Widget>[
                                 Icon(Icons.access_time, color: primaryColour),
                                 SizedBox(width: marginSmall),
-                                Text(detailViewModel.detail.runtime)
+                                Text(viewModel.detail.runtime)
                               ],
                             ),
                           ],
@@ -112,14 +112,6 @@ class _DetailViewState extends State<DetailView> {
                       Container(
                         alignment: Alignment.topLeft,
                         margin: EdgeInsets.only(left: margin, right: margin, top: margin),
-                        child: Text(detailViewModel.detail.tagline,
-                            textAlign: TextAlign.start,
-                            style: GoogleFonts.archivoBlack(
-                                fontSize: fontMedium, color: primaryBlack)),
-                      ),
-                      Container(
-                        alignment: Alignment.topLeft,
-                        margin: EdgeInsets.only(left: margin, right: margin, top: margin),
                         child: Text("Overview",
                             style: GoogleFonts.archivoBlack(
                                 fontSize: fontLarge, color: primaryColour)),
@@ -127,7 +119,7 @@ class _DetailViewState extends State<DetailView> {
                       Container(
                         alignment: Alignment.topLeft,
                         margin: EdgeInsets.only(left: margin, right: margin, top: margin),
-                        child: Text(detailViewModel.detail.overview,
+                        child: Text(viewModel.detail.overview,
                             style:
                                 GoogleFonts.tenorSans(fontSize: fontMedium, color: primaryColour)),
                       ),
@@ -140,8 +132,8 @@ class _DetailViewState extends State<DetailView> {
                             style: GoogleFonts.archivoBlack(
                                 fontSize: fontMedium, color: primaryColour)),
                       ),
-                      (detailViewModel.detail.trailers.isNotEmpty)
-                          ? TrailerList(detailViewModel.detail.trailers)
+                      (viewModel.detail.trailers.isNotEmpty)
+                          ? TrailerList(viewModel.detail.trailers)
                           : Center(child: CircularProgressIndicator()),
                       Container(
                         alignment: Alignment.topLeft,
