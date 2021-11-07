@@ -14,14 +14,14 @@ class DetailViewModel extends BaseViewModel {
 
   MovieDetail get detail => _detail;
 
-  onViewCreated() async {
+  onViewCreated(int movieId) async {
     var secret = await _secretRepo.getApi();
     _apiKey = secret.apiKey;
-    _getDetail();
+    _getDetail(movieId);
   }
 
-  _getDetail() async {
-    _detail = await _detailInteractor.getDetail(_apiKey, 420817);
+  _getDetail(int movieId) async {
+    _detail = await _detailInteractor.getDetail(_apiKey, movieId);
     notifyListeners();
   }
 }

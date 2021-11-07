@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:movies/data/models/navigation_models.dart';
 import 'package:movies/ui/views/base_view.dart';
 import 'package:movies/ui/views/detail/detail_appbar.dart';
 import 'package:movies/ui/views/detail/detail_viewmodel.dart';
@@ -19,9 +20,11 @@ class DetailView extends StatefulWidget {
 class _DetailViewState extends State<DetailView> {
   @override
   Widget build(BuildContext context) {
+    final args = ModalRoute.of(context)!.settings.arguments as MainToDetailArgs;
+
     return BaseView<DetailViewModel>(
       onViewModelCreated: (detailViewModel) {
-        detailViewModel.onViewCreated();
+        detailViewModel.onViewCreated(args.movieId);
       },
       builder: (context, detailViewModel, child) => Scaffold(
           resizeToAvoidBottomInset: false,

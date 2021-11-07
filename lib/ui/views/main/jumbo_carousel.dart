@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:movies/data/models/navigation_models.dart';
 import 'package:movies/dimens.dart';
 import 'package:movies/domain/movie.dart';
 import 'package:movies/ui/views/detail/detail_view.dart';
@@ -36,9 +37,10 @@ class JumboCarousel extends StatelessWidget {
       children: <Widget>[
         GestureDetector(
           onTap: () {
-            Navigator.push(
+            Navigator.pushNamed(
               context,
-              MaterialPageRoute(builder: (context) => DetailView()),
+              DetailView.id,
+              arguments: MainToDetailArgs(movieId: currentMovie.id),
             );
           },
           child: Card(
@@ -50,7 +52,7 @@ class JumboCarousel extends StatelessWidget {
             child: Container(
               width: 350,
               decoration: BoxDecoration(
-                image: DecorationImage(image: NetworkImage(currentMovie.backdropPath)),
+                image: DecorationImage(image: NetworkImage(currentMovie.backdropPath, scale: 0.85)),
                 borderRadius: BorderRadius.circular(borderRadius),
                 boxShadow: [BoxShadow(color: primaryColourShadow4, blurRadius: blurRadius, spreadRadius: spreadRadius)],
               ),
