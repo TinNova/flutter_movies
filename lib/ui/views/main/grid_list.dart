@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:movies/data/models/navigation_models.dart';
 import 'package:movies/domain/movie.dart';
+import 'package:movies/ui/views/detail/detail_view.dart';
 import '../../../colours.dart';
 import '../../../dimens.dart';
 
@@ -24,18 +26,31 @@ class GridList extends StatelessWidget {
             Movie movie = movies[index];
             return Stack(
               children: <Widget>[
-                Card(
-                  elevation: 3,
-                  shadowColor: Colors.black,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
-                  margin: EdgeInsets.all(0.0),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(image: NetworkImage(movie.posterPath)),
-                      borderRadius: BorderRadius.circular(borderRadius),
-                      boxShadow: [
-                        BoxShadow(color: primaryColourShadow4, blurRadius: blurRadius, spreadRadius: spreadRadius),
-                      ],
+                GestureDetector(
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      DetailView.id,
+                      arguments: MainToDetailArgs(movieId: movie.id),
+                    );
+                  },
+                  child: Card(
+                    elevation: 3,
+                    shadowColor: Colors.black,
+                    shape:
+                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
+                    margin: EdgeInsets.all(0.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        image: DecorationImage(image: NetworkImage(movie.posterPath)),
+                        borderRadius: BorderRadius.circular(borderRadius),
+                        boxShadow: [
+                          BoxShadow(
+                              color: primaryColourShadow4,
+                              blurRadius: blurRadius,
+                              spreadRadius: spreadRadius),
+                        ],
+                      ),
                     ),
                   ),
                 ),
