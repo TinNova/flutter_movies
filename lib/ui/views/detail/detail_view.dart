@@ -69,12 +69,12 @@ class _DetailViewState extends State<DetailView> {
                             padding: EdgeInsets.only(left: marginHalf, right: margin),
                             shrinkWrap: true,
                             scrollDirection: Axis.horizontal,
-                            itemCount: genres.length,
+                            itemCount: viewModel.detail.genres.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Container(
                                 margin: EdgeInsets.only(left: marginHalf),
                                 child: Chip(
-                                  label: Text(genres[index]),
+                                  label: Text(viewModel.detail.genres[index].name),
                                 ),
                               );
                             }),
@@ -165,13 +165,4 @@ class _DetailViewState extends State<DetailView> {
           )),
     );
   }
-
-  List<String> genres = <String>[
-    "changeMe",
-    "changeMe",
-    "ScienceFiction",
-    "Adventure",
-    "ScienceFiction",
-    "Adventure"
-  ];
 }

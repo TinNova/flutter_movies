@@ -1,8 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'mdb_genre.dart';
+
 part 'mdb_detail.g.dart';
 
-@JsonSerializable()
+@JsonSerializable(explicitToJson: true) //This means MDBTrailer depends on a nested class
 class MDBDetail {
   final int id;
   @JsonKey(name: 'imdb_id', defaultValue: "")
@@ -11,7 +13,7 @@ class MDBDetail {
   @JsonKey(name: 'backdrop_path', defaultValue: "")
   final String backdropPath;
   final int budget;
-  // final List<MDBGenres> genres;
+  final List<MDBGenre> genres;
   @JsonKey(defaultValue: "")
   final String homepage;
   @JsonKey(name: 'original_language', defaultValue: "")
@@ -47,7 +49,7 @@ class MDBDetail {
     required this.adult,
     required this.backdropPath,
     required this.budget,
-    // required this.genres,
+    required this.genres,
     required this.homepage,
     required this.originalLanguage,
     required this.originalTitle,

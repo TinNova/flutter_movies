@@ -38,7 +38,7 @@ class MovieMapper {
         overview: movieDetail.overview,
         posterPath: MOVIE_DB_BASE_IMAGE_POSTER_DETAIL + movieDetail.posterPath,
         backdropPath: movieDetail.backdropPath,
-        // genres: mapGenre(movieDetail.genres),
+        genres: movieDetail.genres,
         trailers: trailers,
         actors: credits.actors,
         directors: getDirectors(credits.crew),
@@ -60,10 +60,4 @@ class MovieMapper {
             .map((e) => e.name)
             .join(", ");
   }
-
-
-
-// List<Genre> mapGenre(List<MDBGenres> elements) {
-//   return elements.map((e) => Genre(id: e.id, name: e.name)).toList();
-// }
 }

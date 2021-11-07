@@ -1,5 +1,5 @@
 import 'package:movies/data/models/mdb_actor.dart';
-import 'package:movies/data/models/mdb_crew.dart';
+import 'package:movies/data/models/mdb_genre.dart';
 import 'package:movies/data/models/mdb_review.dart';
 
 class MovieDetail {
@@ -8,7 +8,7 @@ class MovieDetail {
   final String overview;
   final String posterPath;
   final String backdropPath;
-  final List<Genre>? genres;
+  final List<MDBGenre> genres;
   final List<Trailer> trailers;
   final List<MDBActor> actors;
   final String directors;
@@ -27,7 +27,7 @@ class MovieDetail {
       this.overview = "",
       this.posterPath = "",
       this.backdropPath = "",
-      this.genres,
+      required this.genres,
       required this.trailers,
       required this.actors,
       this.directors = "",

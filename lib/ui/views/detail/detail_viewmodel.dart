@@ -10,7 +10,8 @@ class DetailViewModel extends BaseViewModel {
   final _detailInteractor = locator<DetailInteractor>();
 
   late String _apiKey;
-  MovieDetail _detail = MovieDetail(trailers: List.empty(), actors: List.empty(), reviews: List.empty());
+  MovieDetail _detail = MovieDetail(
+      genres: List.empty(), trailers: List.empty(), actors: List.empty(), reviews: List.empty());
 
   MovieDetail get detail => _detail;
 
