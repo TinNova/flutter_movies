@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/colours.dart';
 import 'package:movies/ui/views/main/grid_list.dart';
+import 'package:movies/ui_consts.dart';
 import 'package:movies/widgets/text_widgets.dart';
 import 'jumbo_carousel.dart';
 import '../base_view.dart';
@@ -38,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
                             children: <Widget>[
                               Container(
                                 alignment: Alignment.centerLeft,
-                                child: TitleMedium('In Theatres Now'),
+                                child: TitleMedium(IN_THEATRES_NOW),
                                 padding: EdgeInsets.only(left: 15.0, top: 15.0, right: 15.0, bottom: 0.0),
                               ),
                               (mainViewModel.currentMovies.isNotEmpty)
@@ -63,7 +64,7 @@ class _MainScreenState extends State<MainScreen> {
                                 Container(
                                   padding: EdgeInsets.only(right: 10.0),
                                   child: GestureDetector(
-                                    child: TitleMedium('Upcoming'),
+                                    child: TitleMedium(UPCOMING),
                                     onTap: () {
                                       mainViewModel.onUpcomingClicked();
                                     },
@@ -72,7 +73,7 @@ class _MainScreenState extends State<MainScreen> {
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                                   child: GestureDetector(
-                                    child: TitleMedium('Top rated'),
+                                    child: TitleMedium(TOP_RATED),
                                     onTap: () {
                                       mainViewModel.onTopRatedClicked();
                                     },
@@ -81,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
                                 Container(
                                   padding: EdgeInsets.symmetric(horizontal: 10.0),
                                   child: GestureDetector(
-                                    child: TitleMedium('Popular'),
+                                    child: TitleMedium(POPULAR),
                                     onTap: () {
                                       mainViewModel.onPopularClicked();
                                     },
