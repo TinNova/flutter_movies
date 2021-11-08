@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:movies/data/models/navigation_models.dart';
+import 'package:movies/domain/models/actor.dart';
 import 'package:movies/ui/views/base_view.dart';
 import 'package:movies/ui/views/detail/detail_appbar.dart';
 import 'package:movies/ui/views/detail/detail_viewmodel.dart';
@@ -9,6 +10,7 @@ import 'package:movies/ui/views/detail/trailer_list.dart';
 
 import '../../../colours.dart';
 import '../../../dimens.dart';
+import 'actor_list.dart';
 
 class DetailView extends StatefulWidget {
   static const String id = 'detail_view';
@@ -125,8 +127,7 @@ class _DetailViewState extends State<DetailView> {
                       ),
                       Container(
                         alignment: Alignment.topLeft,
-                        margin: EdgeInsets.only(
-                            left: margin, right: margin, top: margin, bottom: margin),
+                          margin: EdgeInsets.only(bottom: margin, left: margin, top: marginLarge),
                         child: Text("Trailers",
                             textAlign: TextAlign.start,
                             style: GoogleFonts.archivoBlack(
@@ -137,17 +138,21 @@ class _DetailViewState extends State<DetailView> {
                           : Center(child: CircularProgressIndicator()),
                       Container(
                         alignment: Alignment.topLeft,
-                        margin: EdgeInsets.all(margin),
+                        margin: EdgeInsets.only(bottom: margin, left: margin, top: marginLarge),
                         child: Text("Cast",
                             textAlign: TextAlign.start,
                             style: GoogleFonts.archivoBlack(
                                 fontSize: fontMedium, color: primaryColour)),
                       ),
-                      Divider(
-                        height: 1.0,
-                        indent: margin,
-                        endIndent: margin,
-                        color: primaryColourShadow,
+                      (viewModel.detail.actors.isNotEmpty)
+                          ? ActorList(viewModel.detail.actors)
+                          : Center(child: CircularProgressIndicator()),
+                      Container(
+                        margin: EdgeInsets.only(top: marginLarge, left: margin, right: margin),
+                        child: Divider(
+                          thickness: 1.0,
+                          color: primaryColourShadow,
+                        ),
                       ),
                       Container(
                         alignment: Alignment.topLeft,

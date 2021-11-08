@@ -2,6 +2,8 @@ import 'package:movies/data/models/mdb_actor.dart';
 import 'package:movies/data/models/mdb_genre.dart';
 import 'package:movies/data/models/mdb_review.dart';
 
+import 'actor.dart';
+
 class MovieDetail {
   final int id;
   final String title;
@@ -10,7 +12,7 @@ class MovieDetail {
   final String backdropPath;
   final List<MDBGenre> genres;
   final List<Trailer> trailers;
-  final List<MDBActor> actors;
+  final List<Actor> actors;
   final String directors;
   final List<MDBReview> reviews;
   final double popularity;

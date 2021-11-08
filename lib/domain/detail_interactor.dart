@@ -5,7 +5,7 @@ import 'package:movies/data/models/mdb_review.dart';
 import 'package:movies/data/models/mdb_trailer.dart';
 import 'package:movies/data/network/json_repo.dart';
 import 'package:movies/domain/mappers/movie_mapper.dart';
-import 'movie_detail.dart';
+import 'models/movie_detail.dart';
 
 class DetailInteractor {
   final _jsonRepo = locator<JsonRepo>();

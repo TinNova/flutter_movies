@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/data/models/navigation_models.dart';
 import 'package:movies/dimens.dart';
-import 'package:movies/domain/movie.dart';
+import 'package:movies/domain/models/movie.dart';
 import 'package:movies/ui/views/detail/detail_view.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:google_fonts/google_fonts.dart';

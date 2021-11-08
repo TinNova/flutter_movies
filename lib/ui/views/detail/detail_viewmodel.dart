@@ -1,7 +1,7 @@
 import 'package:movies/app/locator.dart';
 import 'package:movies/data/network/secret_repo.dart';
 import 'package:movies/domain/detail_interactor.dart';
-import 'package:movies/domain/movie_detail.dart';
+import 'package:movies/domain/models/movie_detail.dart';
 
 import '../base_viewmodel.dart';
 

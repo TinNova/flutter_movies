@@ -1,4 +1,5 @@
 import 'package:movies/app/locator.dart';
+import 'package:movies/data/models/mdb_actor.dart';
 import 'package:movies/data/models/mdb_credits.dart';
 import 'package:movies/data/models/mdb_crew.dart';
 import 'package:movies/data/models/mdb_detail.dart';
@@ -6,10 +7,11 @@ import 'package:movies/data/models/mdb_movie.dart';
 import 'package:movies/data/models/mdb_review.dart';
 import 'package:movies/data/models/mdb_trailer.dart';
 import 'package:movies/domain/mappers/date_time_mapper.dart';
+import 'package:movies/domain/models/actor.dart';
 
 import '../../consts.dart';
-import '../movie.dart';
-import '../movie_detail.dart';
+import '../models/movie.dart';
+import '../models/movie_detail.dart';
 
 class MovieMapper {
   final _dateTimeMapper = locator<DateTimeMapper>();
@@ -40,11 +42,12 @@ class MovieMapper {
         backdropPath: movieDetail.backdropPath,
         genres: movieDetail.genres,
         trailers: trailers,
-        actors: credits.actors,
+        actors: mapActors(credits.actors),
         directors: getDirectors(credits.crew),
         reviews: reviews,
         popularity: movieDetail.popularity,
-        releaseDate: _dateTimeMapper.formatDate(movieDetail.releaseDate, YYYYMMDD_FORMAT, DDMMMYYYY_FORMAT),
+        releaseDate:
+            _dateTimeMapper.formatDate(movieDetail.releaseDate, YYYYMMDD_FORMAT, DDMMMYYYY_FORMAT),
         revenue: movieDetail.revenue,
         runtime: _dateTimeMapper.getTimeString(movieDetail.runtime),
         tagline: movieDetail.tagline,
@@ -54,10 +57,20 @@ class MovieMapper {
 
   String getDirectors(List<MDBCrew> crew) {
     return PREFIX_DIRECTOR +
-        crew
-            .where((e) => e.job == "Director")
-            .toList()
-            .map((e) => e.name)
-            .join(", ");
+        crew.where((e) => e.job == "Director").toList().map((e) => e.name).join(", ");
+  }
+
+  List<Actor> mapActors(List<MDBActor> actors) {
+    return actors
+        .map((e) => Actor(
+            castId: e.castId,
+            character: e.character,
+            creditId: e.creditId,
+            gender: e.gender,
+            id: e.id,
+            name: e.name,
+            order: e.order,
+            profilePath: MOVIE_DB_BASE_IMAGE_PROFILE + e.profilePath))
+        .toList();
   }
 }

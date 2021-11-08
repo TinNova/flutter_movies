@@ -1,7 +1,7 @@
 import 'package:movies/app/locator.dart';
 import 'package:movies/data/network/json_repo.dart';
 import 'mappers/movie_mapper.dart';
-import 'movie.dart';
+import 'models/movie.dart';
 
 class MovieInteractor {
   final _jsonRepo = locator<JsonRepo>();
