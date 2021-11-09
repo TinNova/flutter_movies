@@ -26,9 +26,6 @@ class TrailerList extends StatelessWidget {
                 Container(
                     margin: EdgeInsets.only(left: margin),
                     decoration: BoxDecoration(
-                      image: DecorationImage(
-                          image: NetworkImage(trailer.thumbnail)),
-                      borderRadius: BorderRadius.circular(borderRadius),
                       boxShadow: [
                         BoxShadow(
                             color: primaryColourShadow4,
@@ -39,10 +36,11 @@ class TrailerList extends StatelessWidget {
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(borderRadius),
                       child: Image(
-                        fit: BoxFit.contain,
+                        fit: BoxFit.fill,
                         image: NetworkImage(trailer.thumbnail),
                       ),
-                    )),
+                    )
+                ),
                 Container(
                   width: 72.0,
                   height: 72.0,
