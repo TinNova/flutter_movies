@@ -127,7 +127,7 @@ class _DetailViewState extends State<DetailView> {
                       ),
                       Container(
                         alignment: Alignment.topLeft,
-                          margin: EdgeInsets.only(bottom: margin, left: margin, top: marginLarge),
+                          margin: EdgeInsets.only(left: margin, top: marginLarge),
                         child: Text("Trailers",
                             textAlign: TextAlign.start,
                             style: GoogleFonts.archivoBlack(
@@ -138,7 +138,7 @@ class _DetailViewState extends State<DetailView> {
                           : Center(child: CircularProgressIndicator()),
                       Container(
                         alignment: Alignment.topLeft,
-                        margin: EdgeInsets.only(bottom: margin, left: margin, top: marginLarge),
+                        margin: EdgeInsets.only(left: margin, top: marginMedium),
                         child: Text("Cast",
                             textAlign: TextAlign.start,
                             style: GoogleFonts.archivoBlack(
@@ -148,7 +148,7 @@ class _DetailViewState extends State<DetailView> {
                           ? ActorList(viewModel.detail.actors)
                           : Center(child: CircularProgressIndicator()),
                       Container(
-                        margin: EdgeInsets.only(top: marginLarge, left: margin, right: margin),
+                        margin: EdgeInsets.only(top: marginMedium, left: margin, right: margin),
                         child: Divider(
                           thickness: 1.0,
                           color: primaryColourShadow,

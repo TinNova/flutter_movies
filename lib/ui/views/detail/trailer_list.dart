@@ -12,9 +12,9 @@ class TrailerList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 135.0,
+      height: 140.0,
       child: ListView.builder(
-          padding: EdgeInsets.only(right: margin),
+          padding: EdgeInsets.only(right: margin, top: margin, bottom: margin),
           shrinkWrap: true,
           scrollDirection: Axis.horizontal,
           itemCount: trailers.length,
@@ -25,10 +25,21 @@ class TrailerList extends StatelessWidget {
               children: <Widget>[
                 Container(
                     margin: EdgeInsets.only(left: margin),
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: NetworkImage(trailer.thumbnail)),
+                      borderRadius: BorderRadius.circular(borderRadius),
+                      boxShadow: [
+                        BoxShadow(
+                            color: primaryColourShadow4,
+                            blurRadius: blurRadius,
+                            spreadRadius: spreadRadius)
+                      ],
+                    ),
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(borderRadius),
                       child: Image(
-                        fit: BoxFit.scaleDown,
+                        fit: BoxFit.contain,
                         image: NetworkImage(trailer.thumbnail),
                       ),
                     )),

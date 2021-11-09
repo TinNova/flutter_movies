@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/domain/models/actor.dart';
 
+import '../../../colours.dart';
 import '../../../dimens.dart';
 
 class ActorList extends StatelessWidget {
@@ -12,9 +13,9 @@ class ActorList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 130,
+      height: 152,
       child: ListView.builder(
-          padding: EdgeInsets.only(right: margin),
+          padding: EdgeInsets.only(right: margin, top: margin, bottom: margin),
           scrollDirection: Axis.horizontal,
           itemCount: actors.length,
           shrinkWrap: true,
@@ -25,9 +26,21 @@ class ActorList extends StatelessWidget {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  CircleAvatar(
-                    radius: 45,
-                    foregroundImage: NetworkImage(actor.profilePath),
+                  Container(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(image: NetworkImage(actor.profilePath)),
+                      boxShadow: [
+                        BoxShadow(
+                            color: primaryColourShadow4,
+                            blurRadius: blurRadius,
+                            spreadRadius: spreadRadius)
+                      ],
+                    ),
+                    child: CircleAvatar(
+                      radius: 40,
+                      backgroundImage: NetworkImage(actor.profilePath),
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.only(top: marginHalf),
