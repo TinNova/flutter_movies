@@ -66,7 +66,7 @@ class _DetailViewState extends State<DetailView> {
                       Container(
                         height: chipHeight,
                         alignment: Alignment.topLeft,
-                        margin: EdgeInsets.only(top: margin),
+                        margin: EdgeInsets.only(top: marginMediumHalf),
                         child: ListView.builder(
                             padding: EdgeInsets.only(left: marginHalf, right: margin),
                             shrinkWrap: true,
@@ -76,32 +76,41 @@ class _DetailViewState extends State<DetailView> {
                               return Container(
                                 margin: EdgeInsets.only(left: marginHalf),
                                 child: Chip(
-                                  label: Text(viewModel.detail.genres[index].name),
+                                  padding: EdgeInsets.all(0),
+                                  backgroundColor: white,
+                                  shape: StadiumBorder(
+                                      side: BorderSide(
+                                    width: 1,
+                                    color: primaryColour,
+                                  )),
+                                  label: Text(viewModel.detail.genres[index].name,
+                                      style: TextStyle(fontSize: font, color: primaryColour)),
                                 ),
                               );
                             }),
                       ),
                       Container(
+                        margin: EdgeInsets.symmetric(vertical: marginMediumHalf),
                         padding: EdgeInsets.only(left: margin, right: margin),
                         child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: <Widget>[
                             Row(
                               children: <Widget>[
                                 Icon(Icons.calendar_today, color: primaryColour),
                                 SizedBox(width: marginSmall),
                                 Text(viewModel.detail.releaseDate),
-                                SizedBox(width: marginHalf),
-                                //Text("(US)")
+                                SizedBox(width: marginHalf), //Text
                               ],
                             ),
                             Row(
                               children: <Widget>[
                                 Icon(Icons.access_time, color: primaryColour),
                                 SizedBox(width: marginSmall),
-                                Text(viewModel.detail.runtime)
+                                Text(viewModel.detail.runtime),
                               ],
                             ),
+                            SizedBox(width: marginLarge)
                           ],
                         ),
                       ),
@@ -113,7 +122,7 @@ class _DetailViewState extends State<DetailView> {
                       ),
                       Container(
                         alignment: Alignment.topLeft,
-                        margin: EdgeInsets.only(left: margin, right: margin, top: margin),
+                        margin: EdgeInsets.only(left: margin, right: margin, top: marginMedium),
                         child: Text("Overview",
                             style: GoogleFonts.archivoBlack(
                                 fontSize: fontLarge, color: primaryColour)),
@@ -123,11 +132,11 @@ class _DetailViewState extends State<DetailView> {
                         margin: EdgeInsets.only(left: margin, right: margin, top: margin),
                         child: Text(viewModel.detail.overview,
                             style:
-                                GoogleFonts.tenorSans(fontSize: fontMedium, color: primaryColour)),
+                                GoogleFonts.tenorSans(fontSize: fontMedium, color: primaryBlack)),
                       ),
                       Container(
                         alignment: Alignment.topLeft,
-                          margin: EdgeInsets.only(left: margin, top: marginLarge),
+                        margin: EdgeInsets.only(left: margin, top: marginLarge),
                         child: Text("Trailers",
                             textAlign: TextAlign.start,
                             style: GoogleFonts.archivoBlack(

@@ -5,6 +5,7 @@ const spreadRadius = 2.0;
 const marginSmall = 4.0;
 const marginHalf = 6.0;
 const margin = 12.0;
+const marginMediumHalf = 18.0;
 const marginMedium = 24.0;
 const marginLarge = 36.0;
 const marginGordo = 144.0;
