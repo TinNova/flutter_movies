@@ -62,6 +62,7 @@ class MovieMapper {
 
   List<Actor> mapActors(List<MDBActor> actors) {
     return actors
+        .where((element) => element.profilePath.isNotEmpty)
         .map((e) => Actor(
             castId: e.castId,
             character: e.character,
