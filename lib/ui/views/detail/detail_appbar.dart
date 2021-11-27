@@ -19,15 +19,21 @@ class DetailAppBar implements SliverPersistentHeaderDelegate {
     return Stack(
       overflow: Overflow.visible,
       children: <Widget>[
-        Container(
-          alignment: Alignment.topCenter,
-          height: 500.0,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(borderRadius), bottomRight: Radius.circular(borderRadius)),
-            image: DecorationImage(image: NetworkImage(posterPath), fit: BoxFit.cover),
-          ),
-        ),
+        (posterPath.isEmpty)
+            ? Center(child: CircularProgressIndicator())
+            : Container(
+                alignment: Alignment.topCenter,
+                height: 500.0,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(borderRadius),
+                      bottomRight: Radius.circular(borderRadius)),
+                  image: DecorationImage(
+                    image: NetworkImage(posterPath),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
         Positioned(
           child: Opacity(
             opacity: scoreOpacity(shrinkOffset),
@@ -41,7 +47,8 @@ class DetailAppBar implements SliverPersistentHeaderDelegate {
                   margin: EdgeInsets.only(top: 8),
                   child: Column(
                     children: <Widget>[
-                      Text("8.2", style: GoogleFonts.archivoBlack(fontSize: fontLarge, color: white)),
+                      Text("8.2",
+                          style: GoogleFonts.archivoBlack(fontSize: fontLarge, color: white)),
                       Text("Score", style: GoogleFonts.tenorSans(fontSize: font, color: white))
                     ],
                   ),
