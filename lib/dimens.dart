@@ -12,8 +12,8 @@ const marginGordo = 144.0;
 
 const fontGordo = 32.0;
 const fontLarge = 24.0;
-const fontBig = 20.0;
-const fontMedium = 16.0;
+const fontBig = 18.0;
+const fontMedium = 15.0;
 const font = 12.0;
 
 const marginDetailScreenScore = -80.0;
