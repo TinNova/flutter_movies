@@ -1,5 +1,8 @@
+import 'dart:core';
+
 import 'package:movies/app/locator.dart';
 import 'package:movies/data/models/mdb_actor.dart';
+import 'package:movies/data/models/mdb_author_details.dart';
 import 'package:movies/data/models/mdb_credits.dart';
 import 'package:movies/data/models/mdb_crew.dart';
 import 'package:movies/data/models/mdb_detail.dart';
@@ -32,22 +35,22 @@ class MovieMapper {
         trailerUrl: YOUTUBE_TRAILER_BASE_URL + trailer.key);
   }
 
-  MovieDetail mapDetail(
-      MDBCredits credits, List<MDBReview> reviews, List<Trailer> trailers, MDBDetail movieDetail) {
+  MovieDetail mapDetail(MDBCredits credits, List<MDBReview> reviews, List<Trailer> trailers,
+      MDBDetail movieDetail) {
     return MovieDetail(
         id: movieDetail.id,
         title: movieDetail.title,
         overview: movieDetail.overview,
-        posterPath: MOVIE_DB_BASE_IMAGE_POSTER_DETAIL + movieDetail.posterPath,
+        posterPath: MOVIE_DB_BASE_IMAGE_POSTER_DETAIL_SMALL + movieDetail.posterPath,
         backdropPath: movieDetail.backdropPath,
         genres: movieDetail.genres,
         trailers: trailers,
         actors: mapActors(credits.actors),
         directors: getDirectors(credits.crew),
-        reviews: reviews,
+        reviews: _mapReviews(reviews),
         popularity: movieDetail.popularity,
         releaseDate:
-            _dateTimeMapper.formatDate(movieDetail.releaseDate, YYYYMMDD_FORMAT, DDMMMYYYY_FORMAT),
+        _dateTimeMapper.formatDate(movieDetail.releaseDate, YYYYMMDD_FORMAT, DDMMMYYYY_FORMAT),
         revenue: movieDetail.revenue,
         runtime: _dateTimeMapper.getTimeString(movieDetail.runtime),
         tagline: movieDetail.tagline,
@@ -60,10 +63,49 @@ class MovieMapper {
         crew.where((e) => e.job == "Director").toList().map((e) => e.name).join(", ");
   }
 
+  List<MDBReview> _mapReviews(List<MDBReview> reviews) {
+    return reviews
+        .map((e) => cleanReviewProfilePath(e))
+        .toList();
+  }
+
+  MDBReview cleanReviewProfilePath(MDBReview review) {
+    if (review.authorDetails.profilePath.contains("file")
+        || (review.authorDetails.profilePath.contains("https"))
+    || (review.authorDetails.profilePath.isEmpty)) {
+      return MDBReview(
+          id: review.id,
+          author: review.author,
+          authorDetails: MDBAuthorDetails(
+            name: review.authorDetails.name,
+            username: review.authorDetails.username,
+            profilePath: "https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y",
+            rating: review.authorDetails.rating
+          ),
+          createdAt: review.createdAt,
+          content: review.content,
+          url: review.url);
+    } else {
+      return MDBReview(
+          id: review.id,
+          author: review.author,
+          authorDetails: MDBAuthorDetails(
+              name: review.authorDetails.name,
+              username: review.authorDetails.username,
+              profilePath: "https://www.gravatar.com/avatar" + review.authorDetails.profilePath,
+              rating: review.authorDetails.rating
+          ),
+          createdAt: review.createdAt,
+          content: review.content,
+          url: review.url);
+    }
+  }
+
   List<Actor> mapActors(List<MDBActor> actors) {
     return actors
         .where((element) => element.profilePath.isNotEmpty)
-        .map((e) => Actor(
+        .map((e) =>
+        Actor(
             castId: e.castId,
             character: e.character,
             creditId: e.creditId,

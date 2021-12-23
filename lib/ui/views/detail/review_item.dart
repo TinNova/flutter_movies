@@ -22,55 +22,51 @@ class ReviewItem extends StatelessWidget {
           borderRadius: BorderRadius.circular(borderRadius)),
       child: Column(
         children: [
-          Container(
-            margin: EdgeInsets.only(bottom: margin),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                    child: Text("Title of Review",
-                        textAlign: TextAlign.start,
-                        style: GoogleFonts.archivo(fontSize: fontBig, color: primaryColour))),
-                Chip(
-                  labelPadding: EdgeInsets.only(left: 2.0),
-                  avatar: Icon(
-                    Icons.star_border,
-                    color: Colors.white,
-                  ),
-                  label: Text(
-                    review.authorDetails.rating.toString(),
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  padding: EdgeInsets.only(left: 2.0, right: 12.0),
-                  backgroundColor: primaryColour,
-                )
-              ],
-            ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+                child: Center(child: Text(review.content, style: GoogleFonts.archivo(fontSize: fontMedium))),
+                margin: EdgeInsets.only(bottom: marginLarge, top: margin)),
           ),
-          Container(
-              child: Text(review.content, style: GoogleFonts.archivo(fontSize: fontMedium)),
-              margin: EdgeInsets.only(bottom: marginLarge)),
           Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              CircleAvatar(
-                radius: 24,
-                backgroundImage: NetworkImage(review.authorDetails.profilePath),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(left: marginMediumHalf),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(bottom: marginSmall),
-                      child: Text(review.authorDetails.username,
-                          style:
-                              GoogleFonts.archivoBlack(fontSize: fontMedium, color: primaryColour)),
+              Row(
+                children: [
+                  CircleAvatar(
+                    radius: 24,
+                    backgroundImage: NetworkImage(review.authorDetails.profilePath),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left: marginMediumHalf),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(bottom: marginSmall),
+                          child: Text(review.authorDetails.username,
+                              style: GoogleFonts.archivoBlack(
+                                  fontSize: fontMedium, color: primaryColour)),
+                        ),
+                        Text("Date of Review",
+                            style: GoogleFonts.archivo(fontSize: fontMedium, color: primaryColour))
+                      ],
                     ),
-                    Text("Date of Review",
-                        style: GoogleFonts.archivo(fontSize: fontMedium, color: primaryColour))
-                  ],
+                  ),
+                ],
+              ),
+              Chip(
+                labelPadding: EdgeInsets.only(left: 2.0),
+                avatar: Icon(
+                  Icons.star_border,
+                  color: Colors.white,
                 ),
+                label: Text(
+                  review.authorDetails.rating.toString(),
+                  style: TextStyle(color: Colors.white),
+                ),
+                padding: EdgeInsets.only(left: 2.0, right: 12.0),
+                backgroundColor: primaryColour,
               )
             ],
           )
