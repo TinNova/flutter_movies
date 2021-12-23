@@ -25,4 +25,12 @@ class DetailViewModel extends BaseViewModel {
     _detail = await _detailInteractor.getDetail(_apiKey, movieId);
     notifyListeners();
   }
+
+  int getIndexOfChildren(int numOfReviews) {
+    if (numOfReviews >= 5) {
+      return 5;
+    } else {
+      return numOfReviews;
+    }
+  }
 }

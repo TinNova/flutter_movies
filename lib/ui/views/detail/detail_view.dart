@@ -46,7 +46,7 @@ class _DetailViewState extends State<DetailView> {
                       ? ReviewItem(viewModel.detail.reviews[index])
                       : Center(child: CircularProgressIndicator()),
                 ),
-                childCount: 5,
+                childCount: viewModel.getIndexOfChildren(viewModel.detail.reviews.length),
               ),
             )
           ],
@@ -54,4 +54,6 @@ class _DetailViewState extends State<DetailView> {
       ),
     );
   }
+
+
 }
