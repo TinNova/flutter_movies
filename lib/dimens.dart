@@ -16,7 +16,9 @@ const fontBig = 18.0;
 const fontMedium = 15.0;
 const font = 12.0;
 
-const marginDetailScreenScore = -80.0;
+const heartShareMargin = 13.0;
+
+const marginDetailScreenScore = -20.0;
 const chipHeight = 35.0;
 const trailerPlayArrow = 50.0;
 

@@ -6,20 +6,22 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../../../colours.dart';
 import '../../../dimens.dart';
+import 'detail_viewmodel.dart';
 
 class DetailAppBar implements SliverPersistentHeaderDelegate {
   final double minExtent = 150.0;
   final double maxExtent = 500.0;
-  final String posterPath;
+  DetailViewModel viewModel;
 
-  DetailAppBar(this.posterPath);
+  DetailAppBar(this.viewModel);
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+      BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Stack(
       overflow: Overflow.visible,
       children: <Widget>[
-        (posterPath.isEmpty)
+        (viewModel.detail.posterPath.isEmpty)
             ? Center(child: CircularProgressIndicator())
             : Container(
                 alignment: Alignment.topCenter,
@@ -29,7 +31,7 @@ class DetailAppBar implements SliverPersistentHeaderDelegate {
                       bottomLeft: Radius.circular(borderRadius),
                       bottomRight: Radius.circular(borderRadius)),
                   image: DecorationImage(
-                    image: NetworkImage(posterPath),
+                    image: NetworkImage(viewModel.detail.posterPath),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -41,24 +43,22 @@ class DetailAppBar implements SliverPersistentHeaderDelegate {
               Container(
                 width: 72.0,
                 height: 72.0,
-                margin: EdgeInsets.only(bottom: 24.0),
-                decoration: BoxDecoration(shape: BoxShape.circle, color: primaryColour),
+                decoration:
+                    BoxDecoration(shape: BoxShape.circle, color: primaryColour),
                 child: Container(
                   margin: EdgeInsets.only(top: 8),
                   child: Column(
                     children: <Widget>[
                       Text("8.2",
-                          style: GoogleFonts.archivoBlack(fontSize: fontLarge, color: white)),
-                      Text("Score", style: GoogleFonts.tenorSans(fontSize: font, color: white))
+                          style: GoogleFonts.archivoBlack(
+                              fontSize: fontLarge, color: white)),
+                      Text("Score",
+                          style: GoogleFonts.tenorSans(
+                              fontSize: font, color: white))
                     ],
                   ),
                 ),
               ),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <Widget>[
-                Icon(Icons.favorite_border, color: primaryColour),
-                SizedBox(width: 24.0),
-                Icon(Icons.share, color: primaryColour),
-              ]),
             ]),
           ),
           right: marginMedium,
@@ -89,7 +89,8 @@ class DetailAppBar implements SliverPersistentHeaderDelegate {
   // don't know what this does, it's mandatory
   @override
   // TODO: implement showOnScreenConfiguration
-  PersistentHeaderShowOnScreenConfiguration? get showOnScreenConfiguration => null;
+  PersistentHeaderShowOnScreenConfiguration? get showOnScreenConfiguration =>
+      null;
 
   // don't know what this does, it's mandatory
   @override

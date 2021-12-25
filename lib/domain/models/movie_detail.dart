@@ -22,6 +22,7 @@ class MovieDetail {
   final String tagline;
   final double voteAverage;
   final int voteCount;
+  bool isFavourite;
 
   MovieDetail(
       {this.id = 0,
@@ -40,7 +41,8 @@ class MovieDetail {
       this.runtime = "",
       this.tagline = "",
       this.voteAverage = 0.0,
-      this.voteCount = 0});
+      this.voteCount = 0,
+      this.isFavourite = false});
 }
 
 class Genre {

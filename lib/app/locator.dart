@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:movies/data/network/json_repo.dart';
 import 'package:movies/data/network/secret_repo.dart';
+import 'package:movies/domain/database_repo.dart';
 import 'package:movies/domain/detail_interactor.dart';
 import 'package:movies/domain/mappers/date_time_mapper.dart';
 import 'package:movies/domain/mappers/movie_mapper.dart';
@@ -28,4 +29,6 @@ void setupLocator() {
   // Repos
   locator.registerLazySingleton(() => SecretRepo(secretPath: "assets/secrets.json"));
   locator.registerLazySingleton(() => JsonRepo());
+
+  locator.registerLazySingleton(() => DatabaseRepo());
 }

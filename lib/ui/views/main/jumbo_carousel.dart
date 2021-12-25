@@ -6,11 +6,12 @@ import 'package:movies/ui/views/detail/detail_view.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../../colours.dart';
+import 'main_viewmodel.dart';
 
 class JumboCarousel extends StatelessWidget {
-  final List<Movie> currentMovies;
+  final MainViewModel viewModel;
 
-  JumboCarousel(this.currentMovies);
+  JumboCarousel(this.viewModel);
 
   @override
   Widget build(BuildContext context) {
@@ -23,16 +24,16 @@ class JumboCarousel extends StatelessWidget {
         key: PageStorageKey(Movie),
         itemBuilder: _buildListItem,
         itemSize: 365.0,
-        itemCount: currentMovies.length,
+        itemCount: viewModel.currentMovies.length,
         margin: EdgeInsets.all(0.0),
-        initialIndex: (currentMovies.length / 2).floorToDouble(),
+        initialIndex: (viewModel.currentMovies.length / 2).floorToDouble(),
         onItemFocus: (int) {},
       ),
     );
   }
 
   Widget _buildListItem(BuildContext context, int index) {
-    Movie currentMovie = currentMovies[index];
+    Movie currentMovie = viewModel.currentMovies[index];
     return Stack(
       children: <Widget>[
         GestureDetector(
@@ -74,9 +75,19 @@ class JumboCarousel extends StatelessWidget {
                 Positioned(
                   right: 16.0,
                   top: 16.0,
-                  child: Icon(
-                    Icons.favorite_border,
-                    color: Colors.white,
+                  child: GestureDetector(
+                    onTap: () {
+                      viewModel.onHeartIconClickCarousel(currentMovie);
+                    },
+                    child: (currentMovie.isFavourite)
+                        ? Icon(
+                      Icons.favorite_outlined,
+                      color: primaryColour,
+                    )
+                        : Icon(
+                      Icons.favorite_border,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
               ]),

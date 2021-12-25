@@ -43,7 +43,7 @@ class _MainScreenState extends State<MainScreen> {
                                 padding: EdgeInsets.only(left: 15.0, top: 15.0, right: 15.0, bottom: 0.0),
                               ),
                               (mainViewModel.currentMovies.isNotEmpty)
-                                  ? JumboCarousel(mainViewModel.currentMovies)
+                                  ? JumboCarousel(mainViewModel)
                                   : Center(child: CircularProgressIndicator()),
                             ],
                           );
@@ -103,7 +103,7 @@ class _MainScreenState extends State<MainScreen> {
                     ];
                   },
                   body: (mainViewModel.gridMovies != null)
-                      ? GridList(mainViewModel.gridMovies)
+                      ? GridList(mainViewModel)
                       : Center(child: CircularProgressIndicator()),
                 ),
               ),

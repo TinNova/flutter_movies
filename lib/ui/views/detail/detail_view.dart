@@ -18,7 +18,6 @@ class _DetailViewState extends State<DetailView> {
   @override
   Widget build(BuildContext context) {
     final args = ModalRoute.of(context)!.settings.arguments as MainToDetailArgs;
-
     return BaseView<DetailViewModel>(
       onViewModelCreated: (viewModel) {
         viewModel.onViewCreated(args.movieId);
@@ -31,11 +30,11 @@ class _DetailViewState extends State<DetailView> {
             SliverPersistentHeader(
               pinned: true,
               floating: false,
-              delegate: DetailAppBar(viewModel.detail.posterPath),
+              delegate: DetailAppBar(viewModel),
             ),
             SliverToBoxAdapter(
               child: (viewModel.detail.actors.isNotEmpty)
-                  ? DetailBody(viewModel.detail)
+                  ? DetailBody(viewModel)
                   : Center(child: CircularProgressIndicator()),
             ),
             SliverList(

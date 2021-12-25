@@ -1,39 +1,66 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:movies/domain/models/movie_detail.dart';
 import 'package:movies/ui/views/detail/trailer_list.dart';
 
 import '../../../colours.dart';
 import '../../../dimens.dart';
 import 'actor_list.dart';
+import 'detail_viewmodel.dart';
 
 class DetailBody extends StatelessWidget {
-  final MovieDetail detail;
+  final DetailViewModel viewModel;
 
-  DetailBody(this.detail);
+  DetailBody(this.viewModel);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-            alignment: Alignment.topLeft,
-            margin: EdgeInsets.only(top: margin, left: margin, right: marginGordo),
-            child: Row(
-              children: <Widget>[
-                Expanded(
-                    flex: 7,
-                    child: Text(detail.title,
-                        style:
-                            GoogleFonts.archivoBlack(fontSize: fontGordo, color: primaryColour))),
-              ],
-            )),
+          alignment: Alignment.topLeft,
+          margin:
+              EdgeInsets.only(top: margin, left: margin, right: marginMedium),
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Expanded(
+                  flex: 7,
+                  child: Text(viewModel.detail.title,
+                      style: GoogleFonts.archivoBlack(
+                          fontSize: fontGordo, color: primaryColour))),
+              Container(
+                margin: EdgeInsets.only(top: heartShareMargin),
+                child: Row(
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          viewModel.onHeartIconClick(viewModel.detail);
+                        },
+                        child: (viewModel.detail.isFavourite)
+                            ? Icon(
+                                Icons.favorite_outlined,
+                                color: primaryColour,
+                              )
+                            : Icon(
+                                Icons.favorite_border,
+                                color: primaryColour,
+                              )),
+                    SizedBox(width: 24.0),
+                    Icon(Icons.share, color: primaryColour),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
         Container(
           alignment: Alignment.topLeft,
-          margin: EdgeInsets.only(left: margin, top: margin, right: marginGordo),
-          child: Text(detail.directors,
-              style: GoogleFonts.tenorSans(fontSize: fontMedium, color: Colors.black)),
+          margin:
+              EdgeInsets.only(left: margin, top: margin, right: marginGordo),
+          child: Text(viewModel.detail.directors,
+              style: GoogleFonts.tenorSans(
+                  fontSize: fontMedium, color: Colors.black)),
         ),
         Container(
           height: chipHeight,
@@ -43,7 +70,7 @@ class DetailBody extends StatelessWidget {
               padding: EdgeInsets.only(left: marginHalf, right: margin),
               shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              itemCount: detail.genres.length,
+              itemCount: viewModel.detail.genres.length,
               itemBuilder: (BuildContext context, int index) {
                 return Container(
                   margin: EdgeInsets.only(left: marginHalf),
@@ -55,7 +82,7 @@ class DetailBody extends StatelessWidget {
                       width: 1,
                       color: primaryColour,
                     )),
-                    label: Text(detail.genres[index].name,
+                    label: Text(viewModel.detail.genres[index].name,
                         style: TextStyle(fontSize: font, color: primaryColour)),
                   ),
                 );
@@ -71,7 +98,7 @@ class DetailBody extends StatelessWidget {
                 children: <Widget>[
                   Icon(Icons.calendar_today, color: primaryColour),
                   SizedBox(width: marginSmall),
-                  Text(detail.releaseDate),
+                  Text(viewModel.detail.releaseDate),
                   SizedBox(width: marginHalf), //Text
                 ],
               ),
@@ -79,7 +106,7 @@ class DetailBody extends StatelessWidget {
                 children: <Widget>[
                   Icon(Icons.access_time, color: primaryColour),
                   SizedBox(width: marginSmall),
-                  Text(detail.runtime),
+                  Text(viewModel.detail.runtime),
                 ],
               ),
               SizedBox(width: marginLarge)
@@ -94,38 +121,44 @@ class DetailBody extends StatelessWidget {
         ),
         Container(
           alignment: Alignment.topLeft,
-          margin: EdgeInsets.only(left: margin, right: margin, top: marginMedium),
+          margin:
+              EdgeInsets.only(left: margin, right: margin, top: marginMedium),
           child: Text("Overview",
-              style: GoogleFonts.archivoBlack(fontSize: fontLarge, color: primaryColour)),
+              style: GoogleFonts.archivoBlack(
+                  fontSize: fontLarge, color: primaryColour)),
         ),
         Container(
           alignment: Alignment.topLeft,
           margin: EdgeInsets.only(left: margin, right: margin, top: margin),
-          child: Text(detail.overview,
-              style: GoogleFonts.tenorSans(fontSize: fontMedium, color: primaryBlack)),
+          child: Text(viewModel.detail.overview,
+              style: GoogleFonts.tenorSans(
+                  fontSize: fontMedium, color: primaryBlack)),
         ),
         Container(
           alignment: Alignment.topLeft,
           margin: EdgeInsets.only(left: margin, top: marginLarge),
           child: Text("Trailers",
               textAlign: TextAlign.start,
-              style: GoogleFonts.archivoBlack(fontSize: fontMedium, color: primaryColour)),
+              style: GoogleFonts.archivoBlack(
+                  fontSize: fontMedium, color: primaryColour)),
         ),
-        (detail.trailers.isNotEmpty)
-            ? TrailerList(detail.trailers)
+        (viewModel.detail.trailers.isNotEmpty)
+            ? TrailerList(viewModel.detail.trailers)
             : Center(child: CircularProgressIndicator()),
         Container(
           alignment: Alignment.topLeft,
           margin: EdgeInsets.only(left: margin, top: marginMedium),
           child: Text("Cast",
               textAlign: TextAlign.start,
-              style: GoogleFonts.archivoBlack(fontSize: fontMedium, color: primaryColour)),
+              style: GoogleFonts.archivoBlack(
+                  fontSize: fontMedium, color: primaryColour)),
         ),
-        (detail.actors.isNotEmpty)
-            ? ActorList(detail.actors)
+        (viewModel.detail.actors.isNotEmpty)
+            ? ActorList(viewModel.detail.actors)
             : Center(child: CircularProgressIndicator()),
         Container(
-          margin: EdgeInsets.only(top: marginMedium, left: margin, right: margin),
+          margin:
+              EdgeInsets.only(top: marginMedium, left: margin, right: margin),
           child: Divider(
             thickness: 1.0,
             color: primaryColourShadow,
@@ -136,7 +169,8 @@ class DetailBody extends StatelessWidget {
             margin: EdgeInsets.all(margin),
             child: Text("Reviews",
                 textAlign: TextAlign.start,
-                style: GoogleFonts.archivoBlack(fontSize: fontLarge, color: primaryColour))),
+                style: GoogleFonts.archivoBlack(
+                    fontSize: fontLarge, color: primaryColour))),
       ],
     );
   }

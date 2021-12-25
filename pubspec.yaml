@@ -10,6 +10,10 @@ dependencies:
   flutter:
     sdk: flutter
 
+  # SQLite
+  sqflite: ^2.0.1
+  path: ^1.8.0
+
   jiffy: ^4.1.0
   cupertino_icons: ^1.0.3
   scroll_snap_list: ^0.8.4
