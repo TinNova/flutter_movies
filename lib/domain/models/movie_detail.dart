@@ -1,4 +1,3 @@
-import 'package:movies/data/models/mdb_actor.dart';
 import 'package:movies/data/models/mdb_genre.dart';
 import 'package:movies/data/models/mdb_review.dart';
 

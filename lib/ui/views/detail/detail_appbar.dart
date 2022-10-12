@@ -19,7 +19,6 @@ class DetailAppBar implements SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Stack(
-      overflow: Overflow.visible,
       children: <Widget>[
         (viewModel.detail.posterPath.isEmpty)
             ? Center(child: CircularProgressIndicator())

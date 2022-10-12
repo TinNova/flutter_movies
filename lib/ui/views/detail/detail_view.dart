@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:movies/data/models/navigation_models.dart';
 import 'package:movies/ui/views/base_view.dart';
