@@ -9,12 +9,16 @@ import 'package:movies/domain/main_interactor.dart';
 import 'package:movies/ui/views/detail/detail_viewmodel.dart';
 import 'package:movies/ui/views/main/main_viewmodel.dart';
 
+import '../ui/views/login/login_viewmodel.dart';
+
 GetIt locator = GetIt.instance;
 
 void setupLocator() {
   // ViewModels
   locator.registerFactory(() => MainViewModel());
   locator.registerFactory(() => DetailViewModel());
+  locator.registerFactory(() => LoginViewModel());
+
 
 //  locator.registerLazySingleton(() => NavigationService());
 

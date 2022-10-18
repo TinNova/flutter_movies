@@ -19,10 +19,12 @@ class MainViewModel extends BaseViewModel {
   List<Movie> _jumboMovies = [];
 
   List<Movie> get gridMovies => _gridMovies;
+
   List<Movie> get currentMovies => _jumboMovies;
 
   onViewCreated() async {
-    await _secretRepo.getApi()
+    await _secretRepo
+        .getApi()
         .then((value) => _initScreen(value.apiKey))
         .onError((error, stackTrace) => null);
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:movies/app/locator.dart';
 import 'package:movies/ui/views/detail/detail_view.dart';
+import 'package:movies/ui/views/login/login_screen.dart';
 import 'app/sqlite.dart';
 import 'ui/views/main/main_screen.dart';
 
@@ -15,13 +16,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       // home: MainScreen(),
-      initialRoute: MainScreen.id,
+      initialRoute: LoginScreen.id,
       routes: {
+        LoginScreen.id: (context) => LoginScreen(),
         MainScreen.id: (context) => MainScreen(),
         DetailView.id: (context) => DetailView(),
 //        CastScreen.id: (context) => CastScreen(),
 //        RegistrationScreen.id: (context) => RegistrationScreen(),
-//        LoginScreen.id: (context) => LoginScreen(),
 //        SearchScreen.id: (context) => SearchScreen()
       },
     );
