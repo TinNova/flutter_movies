@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/data/models/navigation_models.dart';
+import 'package:movies/data/models/spring_movie.dart';
 import 'package:movies/dimens.dart';
 import 'package:movies/domain/models/movie.dart';
 import 'package:movies/ui/views/detail/detail_view.dart';
@@ -33,7 +34,7 @@ class JumboCarousel extends StatelessWidget {
   }
 
   Widget _buildListItem(BuildContext context, int index) {
-    Movie currentMovie = viewModel.currentMovies[index];
+    SpringMovie currentMovie = viewModel.currentMovies[index];
     return Stack(
       children: <Widget>[
         GestureDetector(
@@ -53,7 +54,7 @@ class JumboCarousel extends StatelessWidget {
             child: Container(
               width: 350,
               decoration: BoxDecoration(
-                image: DecorationImage(image: NetworkImage(currentMovie.backdropPath, scale: 0.85)),
+                image: DecorationImage(image: NetworkImage(currentMovie.posterPath, scale: 0.85)),
                 borderRadius: BorderRadius.circular(borderRadius),
                 boxShadow: [BoxShadow(color: primaryColourShadow4, blurRadius: blurRadius, spreadRadius: spreadRadius)],
               ),
@@ -65,7 +66,7 @@ class JumboCarousel extends StatelessWidget {
                     width: 350,
                     padding: EdgeInsets.only(right: 30.0),
                     child: Text(
-                      currentMovie.title,
+                      currentMovie.mdbId,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.archivoBlack(fontSize: fontLarge, color: white),
@@ -77,9 +78,9 @@ class JumboCarousel extends StatelessWidget {
                   top: 16.0,
                   child: GestureDetector(
                     onTap: () {
-                      viewModel.onHeartIconClickCarousel(currentMovie);
+                      // viewModel.onHeartIconClickCarousel(currentMovie);
                     },
-                    child: (currentMovie.isFavourite)
+                    child: (true) //currentMovie.isFavourite)
                         ? Icon(
                       Icons.favorite_outlined,
                       color: primaryColour,

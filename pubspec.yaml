@@ -30,6 +30,7 @@ dependencies:
 
   # Http
   http: ^0.13.4
+  dio: ^4.0.6
 
   # Google Fonts
   google_fonts: ^2.1.0

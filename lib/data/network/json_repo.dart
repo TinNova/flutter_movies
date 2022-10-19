@@ -1,83 +1,116 @@
 import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
+import 'package:movies/data/models/login_tokens.dart';
 import 'package:movies/data/models/mdb_credits.dart';
 import 'package:movies/data/models/mdb_detail.dart';
-import 'package:movies/data/models/mdb_movie.dart';
-import 'package:movies/data/models/mdb_movies.dart';
 import 'package:movies/data/models/mdb_review.dart';
 import 'package:movies/data/models/mdb_reviews.dart';
 import 'package:movies/data/models/mdb_trailer.dart';
 import 'package:movies/data/models/mdb_trailers.dart';
 
+import '../models/spring_movie.dart';
+
 class JsonRepo {
   var movieClient = http.Client();
+  var dio = Dio();
 
-  Future<List<MDBMovie>> getMovies(String apiKey, String moviePath) async {
-    http.Response response = await movieClient.get(Uri.parse(
-        'https://api.themoviedb.org/3/movie/$moviePath?api_key=$apiKey&language=en-US&page=1'));
+  Map<String, String> body = {
+    "username": "Goran",
+    "password": "123",
+  };
 
+  Future<LoginTokens> login() async {
+    Response response = await dio.post("http://10.0.2.2:9000/api/login",
+        data: body,
+        options: Options(
+          contentType: Headers.formUrlEncodedContentType,
+        ));
     if (response.statusCode == 200) {
-      return MDBMovies.fromJson(json.decode(response.body)).movies;
+      print(response.data);
+      return LoginTokens.fromJson(response.data);
     } else {
-      return _returnResponse(response);
+      return _returnResponse(response.data);
+    }
+  }
+
+  Future<List<SpringMovie>> getMovies(String moviePath) async {
+    LoginTokens loginTokens = await login();
+    Response response = await dio.get(
+      "http://10.0.2.2:9000/api/movies/",
+      options: Options(
+        contentType: Headers.formUrlEncodedContentType,
+        headers: {'Authorization': 'Bearer ${loginTokens.accessToken}'},
+      ),
+    );
+    if (response.statusCode == 200) {
+      return response.data
+          .map((item) => SpringMovie
+          .fromJson(item))
+          .toList();
+    } else {
+      return _returnResponse(response.data);
     }
   }
 
   Future<MDBDetail> getDetail(String apiKey, int movieId) async {
-    http.Response response = await movieClient.get(
-        Uri.parse("https://api.themoviedb.org/3/movie/$movieId?api_key=$apiKey&language=en-US"));
+    Response response = await dio.get(
+        "https://api.themoviedb.org/3/movie/$movieId?api_key=$apiKey&language=en-US");
 
     if (response.statusCode == 200) {
-      return MDBDetail.fromJson(json.decode(response.body));
+      return MDBDetail.fromJson(json.decode(response.data));
     } else {
       return _returnResponse(response);
     }
   }
 
   Future<List<MDBTrailer>> getTrailers(String apiKey, int movieId) async {
-    http.Response response = await movieClient.get(Uri.parse(
-        "https://api.themoviedb.org/3/movie/$movieId/videos?api_key=$apiKey&language=en-US"));
+    Response response = await dio.get(
+        "https://api.themoviedb.org/3/movie/$movieId/videos?api_key=$apiKey&language=en-US");
 
     if (response.statusCode == 200) {
-      return MDBTrailers.fromJson(json.decode(response.body)).trailers;
+      return MDBTrailers
+          .fromJson(json.decode(response.data))
+          .trailers;
     } else {
       return _returnResponse(response);
     }
   }
 
   Future<MDBCredits> getCredits(String apiKey, int movieId) async {
-    http.Response response = await movieClient
-        .get(Uri.parse("https://api.themoviedb.org/3/movie/$movieId/credits?api_key=$apiKey"));
+    Response response = await dio.get(
+        "https://api.themoviedb.org/3/movie/$movieId/credits?api_key=$apiKey");
 
     if (response.statusCode == 200) {
-      return MDBCredits.fromJson(json.decode(response.body));
+      return MDBCredits.fromJson(json.decode(response.data));
     } else {
       return _returnResponse(response);
     }
   }
 
   Future<List<MDBReview>> getReviews(String apiKey, int movieId) async {
-    http.Response response = await movieClient
-        .get(Uri.parse("https://api.themoviedb.org/3/movie/$movieId/reviews?api_key=$apiKey"));
+    Response response = await dio.get(
+        "https://api.themoviedb.org/3/movie/$movieId/reviews?api_key=$apiKey");
 
     if (response.statusCode == 200) {
-      return MDBReviews.fromJson(json.decode(response.body)).reviews;
+      return MDBReviews
+          .fromJson(json.decode(response.data))
+          .reviews;
     } else {
       return _returnResponse(response);
     }
   }
 
-  dynamic _returnResponse(http.Response response) {
+  dynamic _returnResponse(Response response) {
     switch (response.statusCode) {
       case 400:
-        throw Exception("400 Error: " + response.body.toString());
+        throw Exception("400 Error: " + response.data);
       case 401:
       case 403:
-        throw Exception("401 or 403 Error: " + response.body.toString());
+        throw Exception("401 or 403 Error: " + response.data);
       case 500:
       default:
-        throw Exception(
-            '500 Error: ${response.statusCode}');
+        throw Exception('500 Error: ${response.statusCode}');
     }
   }
 }

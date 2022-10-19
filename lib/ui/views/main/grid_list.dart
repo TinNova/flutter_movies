@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies/data/models/navigation_models.dart';
-import 'package:movies/domain/models/movie.dart';
+import 'package:movies/data/models/spring_movie.dart';
 import 'package:movies/ui/views/detail/detail_view.dart';
 import 'package:movies/ui/views/main/main_viewmodel.dart';
 import '../../../colours.dart';
@@ -25,7 +25,7 @@ class GridList extends StatelessWidget {
             childAspectRatio: 2 / 3,
           ),
           itemBuilder: (BuildContext context, int index) {
-            Movie movie = viewModel.gridMovies[index];
+            SpringMovie movie = viewModel.gridMovies[index];
             return Stack(
               children: <Widget>[
                 GestureDetector(
@@ -62,9 +62,9 @@ class GridList extends StatelessWidget {
                   right: 6.0,
                   child: GestureDetector(
                     onTap: () {
-                      viewModel.onHeartIconClickGrid(movie);
+                      // viewModel.onHeartIconClickGrid(movie);
                     },
-                    child: (movie.isFavourite)
+                    child: (true)//movie.isFavourite)
                         ? Icon(
                             Icons.favorite_outlined,
                             color: primaryColour,
