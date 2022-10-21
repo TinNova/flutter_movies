@@ -3,13 +3,13 @@ import 'package:dio/dio.dart';
 import 'package:http/http.dart' as http;
 import 'package:movies/data/models/login_tokens.dart';
 import 'package:movies/data/models/mdb_credits.dart';
-import 'package:movies/data/models/mdb_detail.dart';
 import 'package:movies/data/models/mdb_review.dart';
 import 'package:movies/data/models/mdb_reviews.dart';
 import 'package:movies/data/models/mdb_trailer.dart';
 import 'package:movies/data/models/mdb_trailers.dart';
 
 import '../models/spring_movie.dart';
+import '../models/spring_movie_detail.dart';
 
 class JsonRepo {
   var movieClient = http.Client();
@@ -21,7 +21,8 @@ class JsonRepo {
   };
 
   Future<LoginTokens> login() async {
-    Response response = await dio.post("http://10.0.2.2:9000/api/login",
+    Response response = await dio.post(
+        "http://10.0.2.2:9000/api/login",
         data: body,
         options: Options(
           contentType: Headers.formUrlEncodedContentType,
@@ -44,21 +45,26 @@ class JsonRepo {
       ),
     );
     if (response.statusCode == 200) {
-      return response.data
-          .map((item) => SpringMovie
-          .fromJson(item))
-          .toList();
+      final List responseBody = response.data;
+      final List<SpringMovie> springMovies =
+          responseBody.map((item) => SpringMovie.fromJson(item)).toList();
+      return springMovies;
     } else {
       return _returnResponse(response.data);
     }
   }
 
-  Future<MDBDetail> getDetail(String apiKey, int movieId) async {
+  Future<SpringMovieDetail> getDetail(int movieId) async {
+    LoginTokens loginTokens = await login();
     Response response = await dio.get(
-        "https://api.themoviedb.org/3/movie/$movieId?api_key=$apiKey&language=en-US");
-
+      "http://10.0.2.2:9000/api/movies/$movieId",
+      options: Options(
+        contentType: Headers.formUrlEncodedContentType,
+        headers: {'Authorization': 'Bearer ${loginTokens.accessToken}'},
+      ),
+    );
     if (response.statusCode == 200) {
-      return MDBDetail.fromJson(json.decode(response.data));
+      return SpringMovieDetail.fromJson(response.data);
     } else {
       return _returnResponse(response);
     }
@@ -69,9 +75,7 @@ class JsonRepo {
         "https://api.themoviedb.org/3/movie/$movieId/videos?api_key=$apiKey&language=en-US");
 
     if (response.statusCode == 200) {
-      return MDBTrailers
-          .fromJson(json.decode(response.data))
-          .trailers;
+      return MDBTrailers.fromJson(json.decode(response.data)).trailers;
     } else {
       return _returnResponse(response);
     }
@@ -93,9 +97,7 @@ class JsonRepo {
         "https://api.themoviedb.org/3/movie/$movieId/reviews?api_key=$apiKey");
 
     if (response.statusCode == 200) {
-      return MDBReviews
-          .fromJson(json.decode(response.data))
-          .reviews;
+      return MDBReviews.fromJson(json.decode(response.data)).reviews;
     } else {
       return _returnResponse(response);
     }

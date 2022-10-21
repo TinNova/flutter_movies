@@ -54,7 +54,7 @@ class JumboCarousel extends StatelessWidget {
             child: Container(
               width: 350,
               decoration: BoxDecoration(
-                image: DecorationImage(image: NetworkImage(currentMovie.posterPath, scale: 0.85)),
+                image: DecorationImage(image: NetworkImage(currentMovie.backdropPath, scale: 0.85)),
                 borderRadius: BorderRadius.circular(borderRadius),
                 boxShadow: [BoxShadow(color: primaryColourShadow4, blurRadius: blurRadius, spreadRadius: spreadRadius)],
               ),
@@ -66,7 +66,7 @@ class JumboCarousel extends StatelessWidget {
                     width: 350,
                     padding: EdgeInsets.only(right: 30.0),
                     child: Text(
-                      currentMovie.mdbId,
+                      currentMovie.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: GoogleFonts.archivoBlack(fontSize: fontLarge, color: white),

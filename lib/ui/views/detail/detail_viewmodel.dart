@@ -1,4 +1,5 @@
 import 'package:movies/app/locator.dart';
+import 'package:movies/data/models/spring_movie_detail.dart';
 import 'package:movies/data/network/secret_repo.dart';
 import 'package:movies/domain/detail_interactor.dart';
 import 'package:movies/domain/models/movie.dart';
@@ -12,23 +13,22 @@ class DetailViewModel extends BaseViewModel {
   final _detailInteractor = locator<DetailInteractor>();
   final _databaseRepo = locator<DatabaseRepo>();
 
-  late String _apiKey;
-  MovieDetail _detail = MovieDetail(
-      genres: List.empty(),
-      trailers: List.empty(),
-      actors: List.empty(),
-      reviews: List.empty());
+  // MovieDetail _detail = MovieDetail(
+  //     genres: List.empty(),
+  //     trailers: List.empty(),
+  //     actors: List.empty(),
+  //     reviews: List.empty());
 
-  MovieDetail get detail => _detail;
+  late SpringMovieDetail _detail = SpringMovieDetail(0, "", "", "", "", "", 0.0, "", 0.0, "", "", 0, 0, false, List.empty(), List.empty(), "");
+
+  SpringMovieDetail get detail => _detail;
 
   onViewCreated(int movieId) async {
-    var secret = await _secretRepo.getApi();
-    _apiKey = secret.apiKey;
     _getDetail(movieId);
   }
 
   _getDetail(int movieId) async {
-    _detail = await _detailInteractor.getDetail(_apiKey, movieId);
+    _detail = await _detailInteractor.getDetail(movieId);
     notifyListeners();
   }
 
@@ -40,18 +40,18 @@ class DetailViewModel extends BaseViewModel {
     }
   }
 
-  void onHeartIconClick(MovieDetail movie) {
-    if (movie.isFavourite) {
-      _databaseRepo.deleteFavMovie(movie.id);
-      _detail.isFavourite = false;
-    } else {
-      _databaseRepo.insertFavMovie(Movie(
-          id: detail.id,
-          title: detail.title,
-          posterPath: detail.posterPath,
-          backdropPath: detail.backdropPath));
-      _detail.isFavourite = true;
-    }
-    notifyListeners();
-  }
+  // void onHeartIconClick(MovieDetail movie) {
+  //   if (movie.isFavourite) {
+  //     _databaseRepo.deleteFavMovie(movie.id);
+  //     _detail.isFavourite = false;
+  //   } else {
+  //     _databaseRepo.insertFavMovie(Movie(
+  //         id: detail.id,
+  //         title: detail.title,
+  //         posterPath: detail.posterPath,
+  //         backdropPath: detail.backdropPath));
+  //     _detail.isFavourite = true;
+  //   }
+  //   notifyListeners();
+  // }
 }

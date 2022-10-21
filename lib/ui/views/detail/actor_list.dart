@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:movies/data/models/spring_actor.dart';
 import 'package:movies/domain/models/actor.dart';
 
 import '../../../colours.dart';
 import '../../../dimens.dart';
 
 class ActorList extends StatelessWidget {
-  final List<Actor> actors;
+  final List<SpringActor> actors;
 
   ActorList(this.actors);
 
@@ -19,7 +20,7 @@ class ActorList extends StatelessWidget {
           itemCount: actors.length,
           shrinkWrap: true,
           itemBuilder: (BuildContext context, int i) {
-            Actor actor = actors[i];
+            SpringActor actor = actors[i];
             return Container(
               margin: EdgeInsets.only(left: margin),
               child: Column(
@@ -28,7 +29,8 @@ class ActorList extends StatelessWidget {
                   Container(
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      image: DecorationImage(image: NetworkImage(actor.profilePath)),
+                      image: DecorationImage(
+                          image: NetworkImage(actor.profilePath)),
                       boxShadow: [
                         BoxShadow(
                             color: primaryColourShadow4,

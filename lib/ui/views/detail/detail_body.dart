@@ -34,7 +34,7 @@ class DetailBody extends StatelessWidget {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          viewModel.onHeartIconClick(viewModel.detail);
+                          // viewModel.onHeartIconClick(viewModel.detail);
                         },
                         child: (viewModel.detail.isFavourite)
                             ? Icon(
@@ -61,32 +61,33 @@ class DetailBody extends StatelessWidget {
               style: GoogleFonts.tenorSans(
                   fontSize: fontMedium, color: Colors.black)),
         ),
-        Container(
-          height: chipHeight,
-          alignment: Alignment.topLeft,
-          margin: EdgeInsets.only(top: marginMediumHalf),
-          child: ListView.builder(
-              padding: EdgeInsets.only(left: marginHalf, right: margin),
-              shrinkWrap: true,
-              scrollDirection: Axis.horizontal,
-              itemCount: viewModel.detail.genres.length,
-              itemBuilder: (BuildContext context, int index) {
-                return Container(
-                  margin: EdgeInsets.only(left: marginHalf),
-                  child: Chip(
-                    padding: EdgeInsets.all(0),
-                    backgroundColor: white,
-                    shape: StadiumBorder(
-                        side: BorderSide(
-                      width: 1,
-                      color: primaryColour,
-                    )),
-                    label: Text(viewModel.detail.genres[index].name,
-                        style: TextStyle(fontSize: font, color: primaryColour)),
-                  ),
-                );
-              }),
-        ),
+        // GENRE CHIPS
+        // Container(
+        //   height: chipHeight,
+        //   alignment: Alignment.topLeft,
+        //   margin: EdgeInsets.only(top: marginMediumHalf),
+        //   child: ListView.builder(
+        //       padding: EdgeInsets.only(left: marginHalf, right: margin),
+        //       shrinkWrap: true,
+        //       scrollDirection: Axis.horizontal,
+        //       itemCount: viewModel.detail.genres.length,
+        //       itemBuilder: (BuildContext context, int index) {
+        //         return Container(
+        //           margin: EdgeInsets.only(left: marginHalf),
+        //           child: Chip(
+        //             padding: EdgeInsets.all(0),
+        //             backgroundColor: white,
+        //             shape: StadiumBorder(
+        //                 side: BorderSide(
+        //               width: 1,
+        //               color: primaryColour,
+        //             )),
+        //             label: Text(viewModel.detail.genres[index].name,
+        //                 style: TextStyle(fontSize: font, color: primaryColour)),
+        //           ),
+        //         );
+        //       }),
+        // ),
         Container(
           margin: EdgeInsets.symmetric(vertical: marginMediumHalf),
           padding: EdgeInsets.only(left: margin, right: margin),
@@ -141,9 +142,10 @@ class DetailBody extends StatelessWidget {
               style: GoogleFonts.archivoBlack(
                   fontSize: fontMedium, color: primaryColour)),
         ),
-        (viewModel.detail.trailers.isNotEmpty)
-            ? TrailerList(viewModel.detail.trailers)
-            : Center(child: CircularProgressIndicator()),
+        // TRAILERS
+        // (viewModel.detail.trailers.isNotEmpty)
+        //     ? TrailerList(viewModel.detail.trailers)
+        //     : Center(child: CircularProgressIndicator()),
         Container(
           alignment: Alignment.topLeft,
           margin: EdgeInsets.only(left: margin, top: marginMedium),

@@ -36,17 +36,18 @@ class _DetailViewState extends State<DetailView> {
                   ? DetailBody(viewModel)
                   : Center(child: CircularProgressIndicator()),
             ),
-            SliverList(
-              delegate: SliverChildBuilderDelegate(
-                (context, index) => Padding(
-                  padding: const EdgeInsets.only(bottom: 20),
-                  child: (viewModel.detail.reviews.isNotEmpty)
-                      ? ReviewItem(viewModel.detail.reviews[index])
-                      : Center(child: CircularProgressIndicator()),
-                ),
-                childCount: viewModel.getIndexOfChildren(viewModel.detail.reviews.length),
-              ),
-            )
+            // The Reviews
+            // SliverList(
+            //   delegate: SliverChildBuilderDelegate(
+            //     (context, index) => Padding(
+            //       padding: const EdgeInsets.only(bottom: 20),
+            //       child: (viewModel.detail.reviews.isNotEmpty)
+            //           ? ReviewItem(viewModel.detail.reviews[index])
+            //           : Center(child: CircularProgressIndicator()),
+            //     ),
+            //     childCount: viewModel.getIndexOfChildren(viewModel.detail.reviews.length),
+            //   ),
+            // )
           ],
         ),
       ),

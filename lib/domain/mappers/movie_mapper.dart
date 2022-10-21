@@ -10,7 +10,9 @@ import 'package:movies/data/models/mdb_movie.dart';
 import 'package:movies/data/models/mdb_review.dart';
 import 'package:movies/data/models/mdb_trailer.dart';
 import 'package:movies/data/models/slq_movie.dart';
+import 'package:movies/data/models/spring_actor.dart';
 import 'package:movies/data/models/spring_movie.dart';
+import 'package:movies/data/models/spring_movie_detail.dart';
 import 'package:movies/domain/mappers/date_time_mapper.dart';
 import 'package:movies/domain/models/actor.dart';
 
@@ -24,8 +26,37 @@ class MovieMapper {
   SpringMovie appendPosterPath(SpringMovie movie) {
     return SpringMovie(
         id: movie.id,
+        title: movie.title,
         posterPath: MOVIE_DATABASE_IMAGE_POSTER + movie.posterPath,
+        backdropPath: MOVIE_DATABASE_IMAGE_BACKDROP + movie.backdropPath,
         mdbId: movie.mdbId);
+  }
+
+  SpringMovieDetail prepareSpringMovieDetail(SpringMovieDetail movie) {
+    return SpringMovieDetail(
+        movie.id,
+        movie.title,
+        movie.overview,
+        MOVIE_DATABASE_IMAGE_POSTER + movie.posterPath,
+        movie.backdropPath,
+        movie.directors,
+        movie.popularity,
+        movie.releaseDate,
+        movie.revenue,
+        movie.runtime,
+        movie.tagline,
+        movie.voteAverage,
+        movie.voteCount,
+        movie.isFavourite,
+        movie.reviews,
+        movie.actors
+            .map((actor) => SpringActor(
+                id: actor.id,
+                name: actor.name,
+                actorMdbId: actor.actorMdbId,
+                profilePath: MOVIE_DB_BASE_IMAGE_PROFILE + actor.profilePath))
+            .toList(),
+        movie.mdbId);
   }
 
   Movie mapMovie(MDBMovie movie, List<SqlMovie> sqlMovies) {
