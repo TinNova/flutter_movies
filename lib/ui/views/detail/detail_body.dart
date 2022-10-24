@@ -34,7 +34,7 @@ class DetailBody extends StatelessWidget {
                   children: [
                     GestureDetector(
                         onTap: () {
-                          // viewModel.onHeartIconClick(viewModel.detail);
+                          viewModel.onHeartIconClick(viewModel.detail);
                         },
                         child: (viewModel.detail.isFavourite)
                             ? Icon(

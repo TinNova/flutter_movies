@@ -48,15 +48,23 @@ class JumboCarousel extends StatelessWidget {
           child: Card(
             elevation: 3,
             shadowColor: Colors.black,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(borderRadius)),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(borderRadius)),
             margin: EdgeInsets.only(left: 7.5, top: 15, right: 7.5, bottom: 15),
             borderOnForeground: false,
             child: Container(
               width: 350,
               decoration: BoxDecoration(
-                image: DecorationImage(image: NetworkImage(currentMovie.backdropPath, scale: 0.85)),
+                image: DecorationImage(
+                    image:
+                        NetworkImage(currentMovie.backdropPath, scale: 0.85)),
                 borderRadius: BorderRadius.circular(borderRadius),
-                boxShadow: [BoxShadow(color: primaryColourShadow4, blurRadius: blurRadius, spreadRadius: spreadRadius)],
+                boxShadow: [
+                  BoxShadow(
+                      color: primaryColourShadow4,
+                      blurRadius: blurRadius,
+                      spreadRadius: spreadRadius)
+                ],
               ),
               child: Stack(children: <Widget>[
                 Positioned(
@@ -69,25 +77,8 @@ class JumboCarousel extends StatelessWidget {
                       currentMovie.title,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: GoogleFonts.archivoBlack(fontSize: fontLarge, color: white),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  right: 16.0,
-                  top: 16.0,
-                  child: GestureDetector(
-                    onTap: () {
-                      // viewModel.onHeartIconClickCarousel(currentMovie);
-                    },
-                    child: (true) //currentMovie.isFavourite)
-                        ? Icon(
-                      Icons.favorite_outlined,
-                      color: primaryColour,
-                    )
-                        : Icon(
-                      Icons.favorite_border,
-                      color: Colors.white,
+                      style: GoogleFonts.archivoBlack(
+                          fontSize: fontLarge, color: white),
                     ),
                   ),
                 ),

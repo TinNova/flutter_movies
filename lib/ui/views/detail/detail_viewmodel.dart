@@ -19,7 +19,8 @@ class DetailViewModel extends BaseViewModel {
   //     actors: List.empty(),
   //     reviews: List.empty());
 
-  late SpringMovieDetail _detail = SpringMovieDetail(0, "", "", "", "", "", 0.0, "", 0.0, "", "", 0, 0, false, List.empty(), List.empty(), "");
+  late SpringMovieDetail _detail = SpringMovieDetail(0, "", "", "", "", "", 0.0,
+      "", 0.0, "", "", 0, 0, false, List.empty(), List.empty(), "");
 
   SpringMovieDetail get detail => _detail;
 
@@ -40,18 +41,19 @@ class DetailViewModel extends BaseViewModel {
     }
   }
 
-  // void onHeartIconClick(MovieDetail movie) {
-  //   if (movie.isFavourite) {
-  //     _databaseRepo.deleteFavMovie(movie.id);
-  //     _detail.isFavourite = false;
-  //   } else {
-  //     _databaseRepo.insertFavMovie(Movie(
-  //         id: detail.id,
-  //         title: detail.title,
-  //         posterPath: detail.posterPath,
-  //         backdropPath: detail.backdropPath));
-  //     _detail.isFavourite = true;
-  //   }
-  //   notifyListeners();
-  // }
+  void onHeartIconClick(SpringMovieDetail movie) async {
+    if (movie.isFavourite) {
+      // _databaseRepo.deleteFavMovie(movie.id);
+      String result = await _detailInteractor.saveFavouriteMovie(0, movie.id);
+      if (result == DELETED) _detail.isFavourite = false;
+    } else {
+      String result = await _detailInteractor.saveFavouriteMovie(0, movie.id);
+      if (result == SAVED) _detail.isFavourite = true;
+      _detail.isFavourite = true;
+    }
+    notifyListeners();
+  }
 }
+
+const String DELETED = "deleted";
+const String SAVED = "saved";

@@ -14,7 +14,12 @@ class DetailInteractor {
   final _databaseRepo = locator<DatabaseRepo>();
   final _movieMapper = locator<MovieMapper>();
 
-  Future<SpringMovieDetail> getDetail(int movieId) async {
+  Future<String> saveFavouriteMovie(int userId, int movieId) async {
+      return _jsonRepo.saveFavouriteMovie(0, movieId);
+  }
+
+
+    Future<SpringMovieDetail> getDetail(int movieId) async {
     late List<SqlMovie> sqlMovies;
     late MDBDetail detail;
     late MDBCredits credits;

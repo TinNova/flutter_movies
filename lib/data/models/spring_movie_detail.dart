@@ -33,7 +33,7 @@ class SpringMovieDetail {
   @JsonKey(name: 'voteCount')
   final int voteCount;
   @JsonKey(name: 'isFavourite')
-  final bool isFavourite;
+  bool isFavourite;
   @JsonKey(name: 'reviews')
   final List<String> reviews;
   @JsonKey(name: 'actors')

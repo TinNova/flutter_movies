@@ -7,6 +7,7 @@ import 'package:movies/data/models/mdb_review.dart';
 import 'package:movies/data/models/mdb_reviews.dart';
 import 'package:movies/data/models/mdb_trailer.dart';
 import 'package:movies/data/models/mdb_trailers.dart';
+import 'package:movies/data/models/spring_movie_saved.dart';
 
 import '../models/spring_movie.dart';
 import '../models/spring_movie_detail.dart';
@@ -21,8 +22,7 @@ class JsonRepo {
   };
 
   Future<LoginTokens> login() async {
-    Response response = await dio.post(
-        "http://10.0.2.2:9000/api/login",
+    Response response = await dio.post("http://10.0.2.2:9000/api/login",
         data: body,
         options: Options(
           contentType: Headers.formUrlEncodedContentType,
@@ -57,7 +57,7 @@ class JsonRepo {
   Future<SpringMovieDetail> getDetail(int movieId) async {
     LoginTokens loginTokens = await login();
     Response response = await dio.get(
-      "http://10.0.2.2:9000/api/movies/$movieId",
+      "http://10.0.2.2:9000/api/movies/$movieId/user/2", //TODO: How do we get the Users ID?
       options: Options(
         contentType: Headers.formUrlEncodedContentType,
         headers: {'Authorization': 'Bearer ${loginTokens.accessToken}'},
@@ -65,6 +65,22 @@ class JsonRepo {
     );
     if (response.statusCode == 200) {
       return SpringMovieDetail.fromJson(response.data);
+    } else {
+      return _returnResponse(response);
+    }
+  }
+
+  Future<String> saveFavouriteMovie(int userId, int movieId) async {
+    LoginTokens loginTokens = await login();
+    Response response = await dio.patch(
+        "http://10.0.2.2:9000/api/users/2", //TODO: how to use actual userId?
+        data: {"id": "$movieId"},
+        options: Options(
+          contentType: Headers.jsonContentType,
+          headers: {'Authorization': 'Bearer ${loginTokens.accessToken}'},
+        ));
+    if (response.statusCode == 201) {
+      return SpringMovieSaved.fromJson(response.data).saved;
     } else {
       return _returnResponse(response);
     }

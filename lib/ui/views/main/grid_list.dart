@@ -57,24 +57,6 @@ class GridList extends StatelessWidget {
                     ),
                   ),
                 ),
-                Positioned(
-                  top: 6.0,
-                  right: 6.0,
-                  child: GestureDetector(
-                    onTap: () {
-                      // viewModel.onHeartIconClickGrid(movie);
-                    },
-                    child: (true)//movie.isFavourite)
-                        ? Icon(
-                            Icons.favorite_outlined,
-                            color: primaryColour,
-                          )
-                        : Icon(
-                            Icons.favorite_border,
-                            color: Colors.white,
-                          ),
-                  ),
-                ),
               ],
             );
           }),
