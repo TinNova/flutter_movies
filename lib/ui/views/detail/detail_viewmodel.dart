@@ -43,12 +43,13 @@ class DetailViewModel extends BaseViewModel {
 
   void onHeartIconClick(SpringMovieDetail movie) async {
     if (movie.isFavourite) {
-      // _databaseRepo.deleteFavMovie(movie.id);
       String result = await _detailInteractor.saveFavouriteMovie(0, movie.id);
-      if (result == DELETED) _detail.isFavourite = false;
+      if (result == DELETED)
+        _detail.isFavourite = false; else true;
     } else {
       String result = await _detailInteractor.saveFavouriteMovie(0, movie.id);
-      if (result == SAVED) _detail.isFavourite = true;
+      if (result == SAVED)
+        _detail.isFavourite = true; else false;
       _detail.isFavourite = true;
     }
     notifyListeners();
