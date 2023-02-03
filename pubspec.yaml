@@ -22,7 +22,17 @@ dependencies:
   json_annotation: ^4.3.0
 
   # Provider
-  provider: ^6.0.1
+  # Version 4.1.3 doesn't have null safety, so --no-sound-null-safety has been added in "edit configurations"
+  # Provider is used only in one place, the base_view to support the ViewModel Architecture.
+  # Once all screens have been migrated to flutter_bloc we can delete the base_view and remove the provider library and "--no-sound-null-safety" from "edit configurations"
+  provider: ^6.0.0
+
+  # Flutter Bloc
+  flutter_bloc: ^8.1.1
+
+  # For comparing objects, "==" in flutter by default checks if two objects are the same instance
+  # To use == to check if two objects are the same object but different instances we use the equatable library
+  equatable: ^2.0.5
 
   # Dependency Injection
   get_it: ^7.1.3

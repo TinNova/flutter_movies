@@ -8,8 +8,7 @@ import 'package:movies/domain/mappers/movie_mapper.dart';
 import 'package:movies/domain/main_interactor.dart';
 import 'package:movies/ui/views/detail/detail_viewmodel.dart';
 import 'package:movies/ui/views/main/main_viewmodel.dart';
-
-import '../ui/views/login/login_viewmodel.dart';
+import '../domain/user_interactor.dart';
 
 GetIt locator = GetIt.instance;
 
@@ -17,8 +16,6 @@ void setupLocator() {
   // ViewModels
   locator.registerFactory(() => MainViewModel());
   locator.registerFactory(() => DetailViewModel());
-  locator.registerFactory(() => LoginViewModel());
-
 
 //  locator.registerLazySingleton(() => NavigationService());
 
@@ -29,6 +26,7 @@ void setupLocator() {
   // Interactors
   locator.registerFactory(() => MovieInteractor());
   locator.registerFactory(() => DetailInteractor());
+  locator.registerFactory(() => UserInteractor());
 
   // Repos
   locator.registerLazySingleton(() => SecretRepo(secretPath: "assets/secrets.json"));

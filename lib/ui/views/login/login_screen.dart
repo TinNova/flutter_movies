@@ -1,52 +1,82 @@
 import 'package:flutter/material.dart';
-
-import '../base_view.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:movies/ui/views/login/login_bloc.dart';
+import 'package:movies/ui/views/login/login_events.dart';
+import 'package:movies/ui/views/login/login_state.dart';
+import '../../../widgets/textfield_widgets.dart';
 import '../components/buttons.dart';
 import '../main/main_screen.dart';
-import 'login_viewmodel.dart';
 
-class LoginScreen extends StatefulWidget {
+// Bloc Inspiration came from here:
+// https://medium.com/flutter-community/flutter-bloc-for-beginners-839e22adb9f5
+class LoginScreen extends StatelessWidget {
   static const String id = 'login_screen';
 
-  @override
-  _LoginScreenState createState() => _LoginScreenState();
-}
+  const LoginScreen({Key? key}) : super(key: key);
 
-class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return BaseView<LoginViewModel>(
-        onViewModelCreated: (viewModel) {},
-        builder: (context, mainViewModel, child) => Scaffold(
-              body: Column(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 64.0, bottom: 8.0, left: 16.0, right: 16.0),
-                    child: TextField(
-                      decoration:
-                          new InputDecoration.collapsed(hintText: 'Username'),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        top: 32.0, bottom: 8.0, left: 16.0, right: 16.0),
-                    child: TextField(
-                      decoration:
-                          new InputDecoration.collapsed(hintText: 'Password'),
-                    ),
-                  ),
-                  Button(
-                      title: "Login",
-                      onPressed: () {
-                        Navigator.pushNamed(
-                          context,
-                          MainScreen.id,
-                        );
-                      }),
-                  Button(title: "Register", onPressed: () {}),
-                ],
-              ),
-            ));
+    return Scaffold(
+      body: RepositoryProvider(
+        create: (context) => LoginBloc(),
+        child: BlocProvider<LoginBloc>(
+          create: (context) => LoginBloc(),
+          child: LoginScreenLayout(),
+        ),
+      ),
+    );
+  }
+}
+
+class LoginScreenLayout extends StatelessWidget {
+  const LoginScreenLayout({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    TextEditingController usernameTextController = TextEditingController();
+    TextEditingController passwordTextController = TextEditingController();
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 80.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          BlocListener<LoginBloc, LoginState>(
+            listener: (context, state) {
+              if (state.status.isError) {
+                // Navigator.pushNamed(context, MainScreen.id);
+                // show an error
+              } else if (state.status.isLoginSuccess) {
+                Navigator.pushNamed(context, MainScreen.id);
+              }
+            },
+            child: Container(),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(
+                top: 64.0, bottom: 16.0, left: 16.0, right: 16.0),
+            child: GenericTextField('Username', usernameTextController),
+          ),
+          Padding(
+            padding:
+                const EdgeInsets.only(bottom: 8.0, left: 16.0, right: 16.0),
+            child: GenericTextField('Password', passwordTextController),
+          ),
+          Button(
+              title: "Login",
+              onPressed: () {
+                context.read<LoginBloc>().add(
+                      LoginBtnClicked(
+                        username: usernameTextController.text,
+                        password: passwordTextController.text,
+                      ),
+                    );
+              }),
+          Button(title: "Register", onPressed: () {}),
+        ],
+      ),
+    );
   }
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:movies/app/locator.dart';
 import 'package:movies/ui/views/base_viewmodel.dart';
+// ignore: import_of_legacy_library_into_null_safe
 import 'package:provider/provider.dart';
 
 class BaseView<T extends BaseViewModel> extends StatefulWidget {
