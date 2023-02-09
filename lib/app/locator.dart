@@ -8,6 +8,7 @@ import 'package:movies/domain/mappers/movie_mapper.dart';
 import 'package:movies/domain/main_interactor.dart';
 import 'package:movies/ui/views/detail/detail_viewmodel.dart';
 import 'package:movies/ui/views/main/main_viewmodel.dart';
+import '../data/network/interceptor/spring_api_interceptor.dart';
 import '../domain/user_interactor.dart';
 
 GetIt locator = GetIt.instance;
@@ -31,6 +32,9 @@ void setupLocator() {
   // Repos
   locator.registerLazySingleton(() => SecretRepo(secretPath: "assets/secrets.json"));
   locator.registerLazySingleton(() => JsonRepo());
-
   locator.registerLazySingleton(() => DatabaseRepo());
+
+  // Api
+  locator.registerFactory(() => SpringApiInterceptor());
+
 }
