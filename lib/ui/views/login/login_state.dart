@@ -14,11 +14,11 @@ import 'package:equatable/equatable.dart';
 // class LoginFailure extends LoginState {}
 
 
-enum LoginStatus {initial, loginSuccess, error, loading }
+enum LoginStatus {initial, loginSuccess, registerSuccess, error, loading }
 
 extension LoginStatusX on LoginStatus {
   bool get isLoginSuccess => this == LoginStatus.loginSuccess;
-  bool get isRegisterSuccess => this == LoginStatus.loginSuccess;
+  bool get isRegisterSuccess => this == LoginStatus.registerSuccess;
   bool get isError => this == LoginStatus.error;
   bool get isLoading => this == LoginStatus.loading;
 }

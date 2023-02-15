@@ -45,11 +45,20 @@ class LoginScreenLayout extends StatelessWidget {
         children: [
           BlocListener<LoginBloc, LoginState>(
             listener: (context, state) {
-              if (state.status.isError) {
-                // Navigator.pushNamed(context, MainScreen.id);
+              switch (state.status) {
+                case LoginStatus.initial:
+                  break;
+                case LoginStatus.loginSuccess:
+                  Navigator.pushNamed(context, MainScreen.id);
+                  break;
+                case LoginStatus.registerSuccess:
+                  // show success message and as user to login now
+                  break;
+                case LoginStatus.error:
                 // show an error
-              } else if (state.status.isLoginSuccess) {
-                Navigator.pushNamed(context, MainScreen.id);
+                  break;
+                case LoginStatus.loading:
+                  break;
               }
             },
             child: Container(),
@@ -74,7 +83,16 @@ class LoginScreenLayout extends StatelessWidget {
                       ),
                     );
               }),
-          Button(title: "Register", onPressed: () {}),
+          Button(
+              title: "Register",
+              onPressed: () {
+                context.read<LoginBloc>().add(
+                  RegisterBtnClicked(
+                    username: usernameTextController.text,
+                    password: passwordTextController.text,
+                  ),
+                );
+              }),
         ],
       ),
     );

@@ -22,7 +22,7 @@ class SpringApiInterceptor extends Interceptor {
       InterceptorsWrapper(
         onRequest: (options, handler) async {
           //TODO: if login or register then skip adding token body
-          if (options.path.contains("api/login")) {
+          if (options.path.contains("api/login") || options.path.contains("api/users/save")) {
             return handler.next(options); //continue
           }
           var accessToken = await _storage.read(key: ACCESS_TOKEN);

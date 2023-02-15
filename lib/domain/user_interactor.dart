@@ -12,4 +12,12 @@ class UserInteractor {
     };
     return _jsonRepo.loginWithBody(body);
   }
+
+  Future<bool> registerUser(String username, String password) async {
+    Map<String, String> body = {
+      "username": username,
+      "password": password,
+    };
+    return _jsonRepo.registerUser(body);
+  }
 }

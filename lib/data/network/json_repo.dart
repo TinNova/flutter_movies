@@ -33,6 +33,20 @@ class JsonRepo {
     }
   }
 
+  // User will first register, then they will have to login, can't be done at once
+  Future<bool> registerUser(Map<String, String> body) async {
+    Response response =
+        await _api.dio.post("http://10.0.2.2:9000/api/users/save", data: body);
+    if (response.statusCode == 200) {
+      print(response.data);
+      var tokens = LoginTokens.fromJson(response.data);
+      _api.saveTokens(tokens.accessToken, tokens.refreshToken);
+      return true;
+    } else {
+      return _returnResponse(response.data);
+    }
+  }
+
   Future<List<SpringMovie>> getMovies(String moviePath) async {
     Response response = await _api.dio.get("http://10.0.2.2:9000/api/movies/");
     if (response.statusCode == 200) {
@@ -58,9 +72,9 @@ class JsonRepo {
 
   Future<String> saveFavouriteMovie(int userId, int movieId) async {
     Response response = await _api.dio.patch(
-        "http://10.0.2.2:9000/api/users/2", //TODO: how to use actual userId?
-        data: {"id": "$movieId"},
-        );
+      "http://10.0.2.2:9000/api/users/2", //TODO: how to use actual userId?
+      data: {"id": "$movieId"},
+    );
     if (response.statusCode == 201) {
       return SpringMovieSaved.fromJson(response.data).saved;
     } else {
