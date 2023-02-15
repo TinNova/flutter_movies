@@ -17,25 +17,6 @@ import '../models/spring_movie_detail.dart';
 class JsonRepo {
   final _api = locator<SpringApiInterceptor>();
 
-  Map<String, String> body = {
-    "username": "Goran",
-    "password": "123",
-  };
-
-  Future<LoginTokens> login() async {
-    Response response = await _api.dio.post("http://10.0.2.2:9000/api/login",
-        data: body,
-        options: Options(
-          contentType: Headers.formUrlEncodedContentType,
-        ));
-    if (response.statusCode == 200) {
-      print(response.data);
-      return LoginTokens.fromJson(response.data);
-    } else {
-      return _returnResponse(response.data);
-    }
-  }
-
   Future<LoginTokens> loginWithBody(Map<String, String> body) async {
     Response response = await _api.dio.post("http://10.0.2.2:9000/api/login",
         data: body,
